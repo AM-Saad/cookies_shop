@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <%- include('./includes/styles.ejs') %>
+        <link rel="stylesheet" href="/admin/css/dashboardnew.css" />
+
+</head>
+
+<body>
+    <%- include('./includes/side-nav.ejs') %>
+
+        <div class="wrapper">
+            <main>
+                <section class="overall-info ">
+                    <div class="gradient-blue overall-info_item">
+                        <p>Avg Income</p>
+                        <b>
+                            <%=Math.floor(totalSalesPrice)%>
+                        </b>
+                    </div>
+                    <div class="gradient-green overall-info_item">
+                        <p>Customers</p>
+                        <b>
+                            <%=customerslenght%>
+                        </b>
+                    </div>
+                    <div class="gradient-yellow overall-info_item">
+                        <p>Orders</p>
+                        <b>
+                            <%=salesNumber%>
+                        </b>
+                    </div>
+                </section>
+                <aside class="grid g-two ">
+                    <div>
+                        <div class="new-sales p-3  border-r-l  ">
+                            <div class="flex f-space-between p-medium border-r-m ">
+                                <h3>New Orders</h3>
+                                <a href="/orders/" class="btn border-r-l bg-w">See More</a>
+                            </div>
+                            <% if(sales.length> 0) { %>
+                                <div>
+                                    <% sales.forEach(s=>{ %>
+                                        <a href="/admin/orders"
+                                            class="flex f-space-between m-3 p-medium font-m border-r-l bg-w order "
+                                            data-si="<%=s._id%>">
+                                            <% if(s.items.length > 1){ %>
+                                                <span>
+                                                    <%=s.items[0].name %> و <%= s.items.length - 1%> Other
+                                                </span>
+                                                <% } else{ %>
+                                                    <span>
+                                                        <%=s.items[0].name %>
+                                                    </span>
+                                                    <% } %>
+                                                        <span class="c-g">$<%=s.totalPrice %></span>
+                                        </a>
+                                        <% }) %>
+                                </div>
+                                <% } else { %>
+                                    <h5 class="p-3 c-b"> No new orders yet..</h5>
+                                    <% } %>
+                        </div>
+                        <div class="new-customers p-3  border-r-l">
+                            <div class="flex f-space-between p-3">
+                                <h3>New Customers</h3>
+                                <a href="/customers/" class="btn border-r-l bg-w">See More </a>
+                            </div>
+                            <% if(customers.length> 0) { %>
+                                <div>
+                                    <% customers.forEach(c=>{ %>
+                                        <div class="flex f-space-between m-3  p-medium font-m border-r-l bg-w">
+                                            <span>
+                                                <%=c.name %>
+                                            </span>
+                                            <span>
+                                                <%=c.mobile %>
+                                            </span>
+                                        </div>
+                                        <% }) %>
+                                </div>
+                                <% } else { %>
+                                    <h5 class="p-3 c-b">No new customers yet..</h5>
+                                    <% } %>
+                        </div>
+                    </div>
+                    <div class="over-all-review p-relative p-3  border-r-l ">
+                        <div class="p-3 flex">
+                            <h3>Overview</h3>
+                        </div>
+                        <img class="loading " src="/admin/images/loading(3).svg">
+
+                        <div class="none">
+                            <canvas id="compareTwoMonthessales"></canvas>
+                        </div>
+                        <div class="none">
+                            <canvas id="compareTwoMonthessalesreveneu"></canvas>
+                        </div>
+                    </div>
+                </aside>
+            </main>
+
+        </div>
+        <%- include('./includes/scripts.ejs') %>
+
+            <script src="/admin/modules/interface/home.js"> </script>
+            <!-- <script src="/admin/modules/interface/orders.js"> </script> -->
+</body>
+
+</html>

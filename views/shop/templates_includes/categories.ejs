@@ -1,0 +1,8 @@
+<ul id="category_box">
+    <% for (let c of categories) { %>
+
+    <li class="<%= c.name === path.replace('/', '') ? 'active' : '' %>">
+        <a href="/products/<%=c.name%>" ><%=c.name%></a>
+    </li>
+    <%}%>
+</ul>

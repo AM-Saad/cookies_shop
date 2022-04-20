@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Custom styles for this template -->
+    <%- include('./templates_includes/template_styles.ejs') %>
+        <link href="/shop/css/checkout.css" rel="stylesheet">
+
+</head>
+
+
+<body class="home-page is-dropdn-click">
+
+    <!-- NAViGATION -->
+
+    <%- include('./templates_includes/nav.ejs') %>
+
+        <!-- NAViGATION -->
+
+        <div class="wrapper">
+
+
+            <section class="section" id="checkout">
+                <div class="head">
+
+                    <h1 class="h1-style">Secure Checkout</h1>
+                    <p>Your order must be atleast <b>100EGP</b> to checkout & confirm.</p>
+                </div>
+                <% if (errmsg) { %>
+                    <div class="user-message user-message-error">
+                        <%= errmsg %>
+                    </div>
+                    <% } %>
+                        <div class="form-wrapper grid g-two">
+
+                            <div class="cart_items">
+                                <div class="flex f-space-between">
+                                    <h3>ORDER SUMMARY</h3>
+
+                                    <a href="/cart?cart=<%= cartId %>">Edit Your Cart</a>
+                                </div>
+                                <% products.forEach(p=> { %>
+
+                                    <li class="cart__item cart-product_item grid g-two">
+                                        <div class="cart__item_main">
+
+                                            <img src="<%=p.image%>" class="h-100" alt="">
+
+                                        </div>
+                                        <div class="cart__item_info">
+                                            <div>
+                                                <h3>
+                                                    <%= p.name%>
+                                                </h3>
+                                                <h3>
+                                                    Quantity: <%= p.quantity%>
+                                                </h3>
+                                            </div>
+                                            <div class="options">
+                                                <% for(a of p.attributes){ %>
+                                                    <div class="options">
+                                                        <%=a.name%>: <%=a.option%>
+                                                    </div>
+                                                    <%}%>
+                                            </div>
+                                            <span class="total"><b data-ot="<%=p.total%>">EGP <%=p.total%></b></span>
+                                        </div>
+                                    </li>
+                                    <% }) %>
+                                        <div class="card-total-sm">
+                                            <% if(existPromo) { %>
+                                                <div class="flex f-space-between"> <span> Subtotal </span><b>EGP
+                                                        <%= totalSum - (totalSum * (cart.promo.discount / 100)) %>
+                                                    </b></div>
+                                                <%} else { %>
+                                                    <div class="flex f-space-between"><span> Subtotal</span>
+                                                        <b class="card-total-price c-g">EGP
+                                                            <%= totalSum %>
+                                                        </b>
+                                                    </div>
+                                                    <% } %>
+                                                        <div id="promo-box">
+                                                            <div class="head flex f-space-between p-relative">
+                                                                <h3 class="m-0">Do Have Promo Code?</h3>
+                                                                <% if(existPromo){ %>
+                                                                    <div class="promo">
+
+                                                                        <i class="fas fa-trash c-r close i-bg"
+                                                                            id="remove-promo"></i>
+                                                                        <p class="c-g m-0">Promo Applied <b>
+                                                                                <%=cart.promo.name %>
+                                                                            </b></p>
+                                                                    </div>
+                                                                    <% } %>
+                                                            </div>
+                                                            <div class="form-control flex">
+                                                                <input type="text" name="pc" id="pc"
+                                                                    placeholder="Add Your Promo Code..">
+                                                                <a id="apply" class="btn">Apply</a>
+                                                            </div>
+                                                        </div>
+                                        </div>
+                            </div>
+
+                            <div class="create_order " id="create_order">
+
+                                <div class="container">
+                                    <header> Order Information</header>
+                                    <div class="progress-bar">
+
+                                        <div class="step">
+                                            <p class="active">Billing</p>
+                                            <div class="bullet active">
+                                                <span>1</span>
+                                                <div class="check fas fa-check"></div>
+                                            </div>
+                                        </div>
+                                        <div class="step">
+                                            <p>Shipping</p>
+                                            <div class="bullet">
+                                                <span>2</span>
+                                                <div class="check fas fa-check"></div>
+                                            </div>
+                                        </div>
+                                        <div class="step">
+                                            <p>Confirm</p>
+                                            <div class="bullet">
+                                                <span>3</span>
+                                            </div>
+                                            <div class="check fas fa-check"></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-outer">
+                                        <form action="/orders?cart=<%= cartId %>" method="POST">
+                                            <input type="hidden" name="_csrf" value="<%=csrfToken%>">
+
+                                            <div class="page one slide-page">
+                                                <div class="title">Billing</div>
+                                                <div class="field">
+                                                    <label for="first_name">First Name</label>
+                                                    <input type="text" name="firstname" id="first_name">
+                                                </div>
+                                                <div class="field">
+                                                    <label for="last_name">Last Name</label>
+                                                    <input type="text" name="lastname" id="last_name">
+                                                </div>
+                                                <div class="field">
+                                                    <label for="phone_number">Phone Number</label>
+                                                    <input type="text" name="phone" id="phone_number">
+                                                </div>
+                                                <!-- <div class="field">
+                                            <label for="alternative_number">رقم بديل</label>
+                                            <input type="text" name="alternative_number" id="alternative_number">
+                                        </div> -->
+
+                                                <div class="field btns">
+                                                    <!-- <button class="prev-1 prev">السابق</button> -->
+                                                    <button class="next-2 next" data-to="two">Next</button>
+                                                </div>
+                                            </div>
+                                            <div class="page two">
+                                                <div class="title">Shipping</div>
+                                                <div class="field">
+                                                    <label for="area">Area</label>
+                                                    <select name="area" id="area">
+                                                        <% for(z of zones) { %>
+                                                            <option value="<%=z.zoneId%>">
+                                                                <%=z.name%>
+                                                            </option>
+                                                            <%}%>
+                                                    </select>
+                                                </div>
+                                                <div class="field">
+                                                    <label for="street_name">Street and Bulding Number</label>
+                                                    <input type="text" name="street" id="street_name">
+                                                </div>
+                                                <!-- <div class="field">
+                                            <label for="building_number">رقم العماره</label>
+                                            <input type="text" name="building_number" id="building_number">
+                                        </div> -->
+                                                <div class="field">
+                                                    <label for="floor">Floor</label>
+                                                    <input type="text" name="floor" id="floor">
+                                                </div>
+                                                <div class="field">
+                                                    <label for="apartment">Apartment Number</label>
+                                                    <input type="text" name="apartment" id="apartment">
+                                                </div>
+                                                <div class="field btns">
+                                                    <button class="prev-1 prev" data-to="one">Prev</button>
+                                                    <button class="next-3 next" data-to="three">Next</button>
+                                                </div>
+                                            </div>
+
+                                            <div class="page three">
+                                                <div class="title">Confirm</div>
+                                                <div class="field">
+                                                    <label for="delivery_date">Delivery Dates</label>
+                                                    <input type="date" name="delivery_date" id="delivery_date">
+                                                </div>
+                                                <div class="field">
+                                                    <label for="moreinfo">Notes</label>
+                                                    <input type="text" name="moreinfo" id="moreinfo">
+                                                </div>
+                                                <div class="field btns">
+                                                    <button class="prev-3 prev" data-to="two">Prev</button>
+                                                    <button class="submit">Submit</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+            </section>
+        </div>
+
+        <%- include('./templates_includes/scripts.ejs') %>
+            <script data-reload="true" src="/shop/modules/multipages_form.js"></script>
+
+
+
+</body>
+
+</html>

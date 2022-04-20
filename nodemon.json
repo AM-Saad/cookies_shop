@@ -1,0 +1,10 @@
+{
+    "env": {
+        "MONGO_USER": "amsdb",
+        "MONGO_PASSWORD": "bodakaka",
+        "DATABASE_URL": "amsecommerce",
+        "NODE_ENV": "production",
+        "VAPID_PRIVATE_KEY":"JL32c2yGKNo6Utz7jlu20ss2P3YIp57VX3dlNQb1-6U",
+        "VAPID_PUBLIC_KEY": "BIJupMjgcWmTy5hNscIxPW5o5oqJtl1vTTn8dyFato9J7gP-r0vnuYlsJzIuCMz2lPOa7_7Eed4Gof_onMZwqT4"
+    }
+}

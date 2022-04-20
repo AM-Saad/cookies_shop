@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <%- include('./includes/styles.ejs') %>
+        <link rel="stylesheet" href="/admin/css/item.css" />
+
+</head>
+
+<body>
+    <%- include('./includes/side-nav.ejs') %>
+        <div class="wrapper">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+            <main id="items">
+                <section class="head">
+                    <div class="flex f-space-between">
+                        <h2>Customers</h2>
+                        <!--Main Actions -->
+                        <aside class="flex f-space-between">
+
+                            <a class="btn bg-w toggle-new-item">New Customer</a>
+                        </aside>
+                    </div>
+                </section>
+                <section class="search flex ">
+
+                    <input class="form-control" type="text" name="search-name" id="search-name"
+                        placeholder="Search by name or number..">
+
+                </section>
+
+                <div class="flex f-start options">
+                    <a href="" class="btn btn-small create-excel">Export <i class="fas fa-file-excel"></i></a>
+                    <div class="p-relative">
+                        <a class="btn btn-small sub-menu_btn">Filter</a>
+                        <ul class="sub-menu">
+                            <li class="filter-items" data-filter="orders" data-val="high">Highest orders </li>
+                            <li class="filter-items" data-filter="orders" data-val="low"> Least orders</li>
+                            <!-- <li class="filter-items" data-filter="deliveredshipments" data-val="high"> الاعلي توصيل للشحنات</li> -->
+                            <!-- <li class="filter-items" data-filter="deliveredshipments" data-val="low"> الاقل توصيل للشحنات</li> -->
+                        </ul>
+                    </div>
+                    <a class="btn btn-small m-3 bar-layout p-medium"><i class="fas fa-bars "></i></a>
+                    <a class="btn btn-small m-3 grid-layout p-medium"><i class="fas fa-grip-horizontal "></i></a>
+                </div>
+                <div class="options-filters flex">
+
+                </div>
+                <div class="client-info_basics m-large">
+                    <div class="new-item-box slideable">
+                        <form action="/create-item" method="post" class="inside-wrapper">
+                            <div class="form-actions flex f-space-around">
+                                <h3>New Customer</h3>
+                                <button type="submit" class="btn btn-success save-item">Creat</button>
+                            </div>
+                            <i class="fas fa-times close toggle-new-item"></i>
+                            <div class="grid g-two">
+
+                                <div>
+                                    <div class="form-group">
+                                        <label for="itemName">Customer Name <span class="c-r">*</span></label>
+                                        <input type="text" id="itemName" class="form-control" name="newitemname"
+                                            placeholder="Customer Name..">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="itemNumber">Customer Mobile..<span class="c-r">*</span></label>
+                                        <input type="number" id="itemNumber" class="form-control" name="newitemmobile"
+                                            placeholder="Customer Mobile..">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="itemAddress">Customer Address.. </label>
+                                        <input type="text" id="itemAddress" class="form-control" name="newitemaddress"
+                                            placeholder="Customer Address..">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="itemEmail"> Customer Email..</label>
+                                        <input type="email" id="itemEmail" class="form-control" name="newitememail"
+                                            placeholder="Customer Email..">
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="form-group none">
+                                        <label for="itemImage">صوره Customer</label>
+                                        <input type="file" id="itemImage" class="form-control itemImage"
+                                            name="newitemimg">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="newitemnotes">Note</label>
+                                        <input type="email" id="newitemnotes" class="form-control" name="newitemnotes"
+                                            placeholder="Leave Note....">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </form>
+
+                    </div>
+                </div>
+
+                <div class="content  g-three">
+                    <div class="content-desc">
+                        <span>Name</span>
+                        <span>Mobile</span>
+                        <span>Orders </span>
+                    </div>
+                    <div class="items"></div>
+                    <img class="loading none" src="/admin/images/loading(3).svg">
+                </div>
+
+
+                <div class="pop-up_container none" data-form="assignShipment" id="create_form">
+                    <div class="pop-up_container_form">
+                        <i class="fas fa-times close close-form"></i>
+                        <form class="assign-shipment">
+                            <div class="form-group">
+                                <label for="name">Order Number </label>
+                                <input type="text" name="name" id="shipmentNo" placeholder="Order Number.." required>
+                            </div>
+                            <div class="flex f-end">
+                                <button type="submit" class="btn btn-success m-3">Assign</button>
+                                <a class="btn btn-danger close-form m-3">Close</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="customer-orders slideable ">
+                    <div class="inside-wrapper p-large">
+
+                        <div class="form-actions">
+                            <i class="fas fa-times close font-xl close-orders"></i>
+
+                            <h4> طلبات العميل </h4>
+                            <section class="search">
+                                <div>
+                                    <a href="" class="download-sheet none">Download</a>
+                                    <div class="flex item">
+
+                                        <select name="search-date-type" id="search-date-type">
+                                            <option value="date">Creation Date</option>
+                                            <option value="order_info.delivery_date">Delivery Date</option>
+                                        </select>
+                                        <div id="reportrange">
+                                            <i class="fa fa-calendar"></i>&nbsp;
+                                            <span></span>
+                                            <i class="fa fa-caret-down"></i>
+                                        </div>
+                                    </div>
+
+                                    <select name="search-status" id="search-status" class="item">
+                                        <option disabled selected>Search by status</option>
+                                        <option value="2">Confirmed</option>
+                                        <option value="4">Delivered</option>
+                                        <option value="5">Bounced back</option>
+                                        <option value="6">Canceled</option>
+                                    </select>
+                                    <input class="item" type="text" name="search-name" id="search-name"
+                                        placeholder="Search order number">
+                                </div>
+                            </section>
+                            <div class="flex">
+
+                                <div class="p-relative">
+                                    <a class="btn btn-small sub-menu_btn">Sort</a>
+                                    <ul class="sub-menu">
+                                        <li class="sort-new sort-date">New</li>
+                                        <li class="sort-old sort-date">Old</li>
+                                    </ul>
+                                </div>
+                                <div class="p-relative">
+                                    <a class="btn btn-small sub-menu_btn">Filter</a>
+                                    <ul class="sub-menu">
+                                        <option value="2">Confirmed</option>
+                                        <option value="4">Delivered</option>
+                                        <option value="5">Bounced back</option>
+                                        <option value="6">Canceled</option>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- <div>
+                                <div class="flex">
+
+                                    <input type="number" name="order-serial" class="order-serial form-control"
+                                        placeholder="ابحث برقم الشحنه" id="">
+                                    <div class="reportrange" id="">
+                                        <i class="fa fa-calendar"></i>&nbsp;
+                                        <span></span>
+                                        <i class="fa fa-caret-down"></i>
+                                    </div>
+                                </div>
+                                <div class="flex">
+
+                                    <div class="p-relative">
+                                        <a class="btn btn-small sub-menu_btn">ترتيب</a>
+                                        <ul class="sub-menu">
+                                            <li class="sort-new sort-date">الجديد</li>
+                                            <li class="sort-old sort-date">القديم</li>
+                                        </ul>
+                                    </div>
+                                    <div class="p-relative">
+                                        <a class="btn btn-small sub-menu_btn">فلتر</a>
+                                        <ul class="sub-menu">
+                                            <li class="filter" data-status="delivered">تم التوصيل</li>
+                                            <li class="filter" data-status="delivered">تم الالغاء</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div> -->
+                            <img src="/admin/images/loading(3).svg" class="loading small none">
+                            <div class="items"></div>
+                            <div class="totals p-medium flex f-space-around">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+        </div>
+
+
+        <%- include('./includes/scripts.ejs') %>
+            <script src="/admin/modules/components/en/customers.js"> </script>
+            <script src="/admin/modules/interface/customerss.js"> </script>
+</body>
+
+</html>

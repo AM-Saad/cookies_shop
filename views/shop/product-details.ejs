@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="http://fonts.cdnfonts.com/css/courgette" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <%- include('./templates_includes/template_styles.ejs') %>
+        <link href="/shop/css/product.css" rel="stylesheet">
+        <link href="/shop/css/products.css" rel="stylesheet">
+
+</head>
+
+
+<body onload="calcProductWithAttrsPrice()" class="home-page is-dropdn-click">
+    <%- include('./templates_includes/search.ejs') %>
+
+        <!-- NAViGATION -->
+
+        <%- include('./templates_includes/nav.ejs') %>
+
+            <!-- NAViGATION -->
+
+            <div class="wrapper">
+                <section class="section" id="category">
+                    <%- include('./templates_includes/categories.ejs') %>
+                </section>
+                <section class="section grid product" id="product" data-p-p="<%=product.info.sellingPrice%>">
+                    <input type="hidden" name="itemId" value="<%=product._id%>">
+
+                    <div class="images-wrapper">
+                        <div class="hero-image">
+                            <img src="<%= product.images[0]%>">
+                        </div>
+                        <div class="more-images">
+
+                        </div>
+                    </div>
+                    <div class="product-summary">
+                        <div class="availability" data-availability="<%=product.info.quantity%>">
+                            <%=product.info.quantity%>
+                                Items Available
+                        </div>
+                        <div class="product-summary_head">
+                            <h1 class="product-title">
+                                <%= product.name %>
+                            </h1>
+                            <h3 class="product-price">EGP <%= product.info.sellingPrice%>
+                            </h3>
+                        </div>
+                        <div class="quantity">
+                            <h3 class="block">Quantity:</h3>
+                            <div class="quantity-input">
+                                <div class="quantity-nav">
+                                    <div class="quantity-button quantity-down" onclick="quantityDown(this)">-</div>
+                                    <input type="number" min="1" name="quantity" class="item-qty" step="1" value="1" />
+                                    <div class="quantity-button quantity-up" onclick="quantityUp(this)">+</div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <%if(product.attributes.length> 0) { %>
+                            <div class="product-summary_attrs " data-attrs='true'>
+                                <% for(a of product.attributes) { %>
+                                    <div class="attribute" data-attr="<%= a.name%>">
+                                        <h3>
+                                            <%= a.name %>
+                                        </h3>
+                                        <div class="flex">
+
+                                            <% for(o of a.options) { %>
+                                                <a data-price="<%=o.price ? o.price : 0 %>" data-options="<%=o.name%>"
+                                                    class="btn unit-input attribute-option <%= a.options.indexOf(o) == 0 ? 'active' : ''%>"
+                                                    data-active="true">
+                                                    <%= o.name%>
+                                                </a>
+                                                <% } %>
+                                        </div>
+                                    </div>
+                                    <% } %>
+                            </div>
+                            <% } %>
+
+                                <a class="add-cart btn big-btn block p-relative">
+                                    <div class="lds-hourglass none"></div>
+                                    <span>Add To Cart</span>
+                                </a>
+                                <p class="deliver_note m-medium f-center">Delivery: from 1 to 2 days maximum.</p>
+                    </div>
+                </section>
+                <section class="section">
+                    <h2 class="h1-style">You may be interested in</h2>
+                    <%if (similir.length> 0) { %>
+                        <ul class="category_products">
+                            <% similir.forEach(i=> { %>
+
+                                <li class="product-card product">
+                                    <input type="hidden" name="itemId" value="<%=i._id%>">
+                                    <a href="/product-details/<%= i._id%>" class="product-img">
+                                        <img src="<%=i.images[0]%>" alt="">
+                                    </a>
+                                    <a href="/product-details/<%= i._id%>" class="product-body">
+                                        <div class="product-body_info">
+                                            <span class="product-body_info_price">
+                                                <% for(o of i.attributes[0].options) { %>
+                                                    EGP<%= (i.info.sellingPrice +
+                                                        parseInt(o.price,10))%> <span>-</span>
+                                                        <%}%>
+                                            </span>
+                                        </div>
+                                        <div class="flex f-space-around product-body_actions">
+                                            <%if(i.attributes.length> 0) { %>
+                                                <div class="btn product-body_addcart ">Select Size</div>
+                                                <%}else { %>
+                                                    <div class="btn product-body_addcart add-cart">
+                                                        <div class="lds-hourglass none"></div>
+                                                        <span>
+                                                            Add To Card
+                                                        </span>
+                                                    </div>
+                                                    <%}%>
+                                                        <div
+                                                            class="btn product-body_viewbtn get-product">
+                                                            <i class="fas fa-eye"></i></div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <% }) %>
+
+                        </ul>
+                        <% } %>
+                </section>
+                <%- include('./templates_includes/cart.ejs') %>
+                    <div class="modal-container none">
+                        <div class="modal modal--bg"></div>
+                    </div>
+            </div>
+            <%- include('./templates_includes/footer.ejs') %>
+
+                <%- include('./templates_includes/scripts.ejs') %>
+
+                    <script data-reload="true" src="/shop/modules/quick_view.js"></script>
+                    <script data-reload="true" src="/shop/modules/products.js"></script>
+</body>
+
+</html>

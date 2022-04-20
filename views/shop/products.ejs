@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Custom styles for this template -->
+    <%- include('./templates_includes/template_styles.ejs') %>
+        <link href="/shop/css/products.css" rel="stylesheet">
+
+</head>
+
+
+<body class="home-page is-dropdn-click">
+
+    <%- include('./templates_includes/search.ejs') %>
+
+
+        <!-- NAViGATION -->
+
+        <%- include('./templates_includes/nav.ejs') %>
+
+            <!-- NAViGATION -->
+
+            <div class="wrapper">
+
+                <section class="section" id="category">
+                    <%- include('./templates_includes/categories.ejs') %>
+                </section>
+                <section class="section" style="min-height: 150px;">
+                    <%if(type !='all' ){ %>
+                        <h2 class="h1-style">
+                            <a href="/products/<%= type %>">
+                                <%= type=='all' ? 'Our Shop' : type%>
+                            </a>
+                            <%= sub ? ' > ' + sub : '' %>
+                        </h2>
+                        <%}else{ %>
+                            <h2 class="h1-style" style="text-align: center; margin-bottom:25px">
+                                <a href="/shop">
+                                    Our Shop
+                                </a>
+
+                            </h2>
+                            <%}%>
+
+                                <%if(products.length> 0) { %>
+                                    <ul class="category_products">
+                                        <%products.forEach(i=> { %>
+
+                                            <li class="product-card product">
+                                                <input type="hidden" name="itemId" value="<%=i._id%>">
+                                                <a href="/product-details/<%= i._id%>" class="product-img">
+                                                    <img src="<%=i.images[0]%>" alt="">
+                                                </a>
+                                                <a href="/product-details/<%= i._id%>" class="product-body">
+                                                    <div class="product-body_info">
+                                                        <span class="product-body_info_price">
+                                                            <% for(o of i.attributes[0].options) { %>
+                                                                EGP <%= (i.info.sellingPrice +
+                                                                    parseInt(o.price,10))%> <span>-</span>
+                                                                    <%}%>
+                                                        </span>
+                                                    </div>
+                                                    <div class="flex f-space-around product-body_actions">
+                                                        <%if(i.attributes.length> 0) { %>
+                                                            <div class="btn product-body_addcart ">Select Size</div>
+                                                            <%}else { %>
+                                                                <div class="btn product-body_addcart add-cart">
+                                                                    <div class="lds-hourglass none"></div>
+                                                                    <span>
+                                                                        Add To Card
+                                                                    </span>
+                                                                </div>
+                                                                <%}%>
+                                                                    <div
+                                                                        class="btn product-body_viewbtn get-product">
+                                                                        <i class="fas fa-eye"></i></div>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <% }) %>
+
+                                    </ul>
+                                    <%- include('./templates_includes/pagination.ejs') %>
+
+                                        <%} else { %>
+                                            <h3 class="bg-lightgray p-3">Nothing here now.. </h3>
+                                            <% } %>
+
+                </section>
+                <% if (interestedIn && interestedIn.length> 0) { %>
+                    <section class="section">
+                        <h3>You May Be Interested In</h3>
+                        <ul class="products-row">
+                            <% interestedIn.forEach(i=> { %>
+
+                                <li class="product-card product">
+                                    <input type="hidden" name="itemId" value="<%= i._id %>">
+                                    <a href="/product-details/<%= i._id %>" class="product-img">
+                                        <img src="<%= i.images[0] %>" alt="">
+                                    </a>
+                                    <div class="product-body">
+                                        <div class="product-body_info">
+                                            <!-- <h3 class="product-body_info_title">
+                                                <a href="/product-details/<%= i._id%>">
+                                                    <%= i.name %>
+                                                </a>
+                                            </h3>
+                                            <span class="product-body_info_price">
+                                                EGP <%= i.info.sellingPrice %>
+                                            </span> -->
+                                        </div>
+                                        <div class="flex f-space-around product-body_actions">
+                                            <%if(i.attributes.length> 0) { %>
+                                                <a href="/product-details/<%= i._id%>"
+                                                    class="btn product-body_addcart ">See Options</a>
+                                                <%}else { %>
+                                                    <a class="btn product-body_addcart add-cart">
+                                                        <div class="lds-hourglass none"></div>
+                                                        <span>
+                                                            Add To Card
+                                                        </span>
+                                                    </a>
+                                                    <% } %>
+                                                        <a class="btn product-body_viewbtn get-product"><i
+                                                                class="fas fa-eye"></i></a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <% }) %>
+                        </ul>
+                    </section>
+                    <% } %>
+
+                        <%- include('./templates_includes/cart.ejs') %>
+                            <div class="modal-container none">
+                                <div class="modal modal--bg"></div>
+                            </div>
+            </div>
+            <%- include('./templates_includes/footer.ejs') %>
+
+                <%- include('./templates_includes/scripts.ejs') %>
+
+                    <script data-reload="true" src="/shop/modules/quick_view.js"></script>
+                    <script data-reload="true" src="/shop/modules/products.js"></script>
+</body>
+
+</html>

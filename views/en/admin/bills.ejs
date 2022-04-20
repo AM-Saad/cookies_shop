@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <%- include('./includes/styles.ejs') %>
+        <link rel="stylesheet" href="/admin/css/expenses.css" />
+
+</head>
+
+
+<body>
+
+    <%- include('./includes/side-nav.ejs') %>
+        <div class="wrapper">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <!-- Expenses -->
+            <main>
+                <section class="head">
+                    <div class="flex f-space-between">
+                        <h2>المصاريف</h2>
+                        <!--Main Actions -->
+                        <aside class="flex f-space-between">
+
+                            <a class="btn bg-w toggle-new-item">فاتوره جديده</a>
+                        </aside>
+                    </div>
+                </section>
+                <section class="search  ">
+                    <div>
+                        <a href="" class="download-sheet none">Download</a>
+                        <div class="flex item">
+
+                            <select name="search-date-type" id="search-date-type">
+                                <option value="date">تاريخ الانشاء </option>
+                                <option value="release_date">تاريخ الاصدار </option>
+                                <option value="due">تاريخ الاستحقاق</option>
+                            </select>
+                            <div id="reportrange">
+                                <i class="fa fa-calendar"></i>&nbsp;
+                                <span></span>
+                                <i class="fa fa-caret-down"></i>
+                            </div>
+                        </div>
+
+                        <select name="search-status" id="search-status" class="item">
+                            <option disabled selected>البحث بنوع المصاريف</option>
+                            <option value="rent">الايجار</option>
+                            <option value="wages">مرتبات</option>
+                            <option value="utilities">ادوات</option>
+                            <option value="advertising">تسويق</option>
+                            <option value="other">اخري</option>
+                        </select>
+                        <input class="item" type="text" name="search-name" id="search-name"
+                            placeholder="ابحث برقم الفاتوره">
+                    </div>
+                </section>
+                <section class="options ">
+
+                    <div class="flex f-space-between">
+                        <div class="flex">
+
+                            <div class="p-relative">
+                                <a class="btn btn-small sub-menu_btn">ترتيب</a>
+                                <ul class="sub-menu">
+                                    <li class="sort-new sort-date">الجديد</li>
+                                    <li class="sort-old sort-date">القديم</li>
+                                </ul>
+                            </div>
+                            <div class="p-relative">
+                                <a class="btn btn-small sub-menu_btn">فلتر</a>
+                                <ul class="sub-menu">
+                                    <li class="filter" data-paid="paid">مدفوعه</li>
+                                    <li class="filter" data-paid="false"> غير مدفوعه</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <a class="btn btn-small sub-menu_btn group-menu_btn p-relative ">
+                                    <i class=" far fa-object-group"></i>
+                                    Group by
+                                    <ul class="sub-menu">
+                                        <li class="btn bg-w group paid-expenses">حاله الدفع</li>
+                                        <li class="btn bg-w group schedule-expenses">Scheduled</li>
+                                    </ul>
+                                </a>
+                            </div>
+                            <a class="btn btn-small bar-layout"><i class="fas fa-bars change-layout "></i></a>
+                            <a class="btn btn-small grid-layout"><i
+                                    class="fas fa-grip-horizontal change-layout"></i></a>
+                            <i class="get-insight fas fa-lightbulb btn btn-small bg-lightgray m-3 c-y"></i>
+                        </div>
+
+                    </div>
+
+                </section>
+                <div class="expenses-box">
+                    <div class="expenses-box_assign">
+                        <div class="assign_employees">
+                            <img src="/admin/images/loading(3).svg" class="loading loading-small none">
+                            <i class="fas fa-times close"> </i>
+                        </div>
+                    </div>
+                    <div class="invoice-wrapper">
+                        <i class="fas fa-times close close-invoice" style="color:black"></i>
+                    </div>
+                    <div class="external-box expenses-type-box none f-space-between">
+                        <h4>نوع جديد</h4>
+                        <i class="fas fa-times font-s close new-expenses-type"></i>
+                        <div class="m-b-3">
+                            <input type="text" class="form-control" name="expenses-type"
+                                placeholder="Expenses type name...">
+                        </div>
+                        <a class="save-expenses-type btn btn-success">save</a>
+                    </div>
+
+                </div>
+                <div class="client-info_basics m-large">
+
+                    <div class="new-item-box slideable">
+
+                        <form action="/create-bill" class="inside-wrapper" method="POST">
+                            <div class="flex f-space-between form-actions ">
+                                <h3>انشاء فاتوره جديده</h3>
+                                <button id="submitExpenses" type="submit" class="btn btn-success">
+                                    <span class="arrow">
+                                        <span>Save</span>
+                                        <i class="fas fa-arrow-up"></i>
+                                    </span>
+                                </button>
+                            </div>
+                            <i class="fas fa-times close toggle-new-item"></i>
+                            <div class="expenses-options flex f-space-between bg-lightgray">
+
+                            </div>
+                            <div class="form-group">
+                                <label for="billType">نوع الفاتوره</label>
+
+                                <select class="form-control" name="billType" id="billType">
+                                    <option value="in">داخل</option>
+                                    <option value="out">خارج</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="category">التصنيف </label>
+                                <div class="flex f-space-between">
+
+                                    <select class="form-control" name="category" id="category">
+                                        <option selected value="null">نوع الفاتوره</option>
+                                        <option value="rent">ايجارات</option>
+                                        <option value="wages">اجور</option>
+                                        <option value="utilities">ادوات</option>
+                                        <option value="advertising">تسويق</option>
+                                        <option value="other">اخري</option>
+                                    </select>
+                                    <i
+                                        class="fas fa-plus btn-small c-g i-bg i-bg-large font-m new-expenses-type bg-lightgray"></i>
+                                </div>
+
+                            </div>
+
+
+                            <div class="form-group suppliers none">
+                                <label for="suppliers">suppliers</label>
+                                <div class="flex f-space-around">
+
+                                    <select class="form-control" name="suppliers" id="suppliers">
+                                        <option data-id="null">Choose Supplier</option>
+                                    </select>
+                                    <i class="i-bg i-bg-large c-g newsupplier fas fa-plus"></i>
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <label for="date">تارخ الفاتوره</label>
+                                <input type="date" name="" id="date">
+                            </div>
+                            <div class="form-group">
+                                <label for="due">تاريخ الدفع</label>
+                                <input type="date" name="" id="due">
+                            </div>
+                            <div class="form-group">
+                                <label for="expensesAmount">قيمه الفاتوره</label>
+                                <input class="form-control" type="number" min="0" value="0" name="amount"
+                                    placeholder="Expenses Amount" id="amount">
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="paid">تم الدفع</label>
+                                <input type="checkbox" name="paid" placeholder="paid" id="paid">
+                            </div>
+
+
+                            <div class="form-group" style="display: none;">
+                                <label for="paidBy">Paid By</label>
+
+                                <select class="form-control" name="paidBy" id="paidBy">
+                                    <option selected value="company">Company</option>
+                                    <option value="employee">Employee(to reimburse)</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="notes">ملاحظات</label>
+                                <input class="form-control" type="text" name="notes"
+                                    placeholder="Marketing Campaign, Tools..." id="notes">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="content-desc">
+                        <span>رقم الفاتوره</span>
+                        <span>التاريخ</span>
+                        <span>المبلغ</span>
+                        <span>التصنيف</span>
+                    </div>
+                    <div class="items"></div>
+                    <img class="loading none" src="/admin/images/loading(3).svg">
+
+                </div>
+
+                <div class="insight_content scaleable">
+                    <div class="inside-wrapper">
+                        <h2 class="f-center">Insights</h2>
+                        <i class="fas fa-times close close-insight"></i>
+                        <div class="form-actions flex f-space-evenly"></div>
+                        <div class="grid p-medium">
+                            <div class=" items-wrapper">
+                                <h4>Number Of Impressions</h4>
+                                <div class="insight-items numbers p-relative"></div>
+                            </div>
+                            <div class=" items-wrapper">
+
+                                <h4>Items Revenue</h4>
+                                <div class=" insight-items revenue  p-relative">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="operations-summary"> </div>
+
+            </main>
+
+
+        </div>
+        <%- include('./includes/scripts.ejs') %>
+
+            <script src="/admin/modules/components/en/bills.js"></script>
+            <script src="/admin/modules/interface/bills.js"></script>
+</body>
+
+</html>

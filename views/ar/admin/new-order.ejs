@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <%- include('./includes/styles.ejs') %>
+        <link rel="stylesheet" href="/admin/css/new-order.css" />
+
+</head>
+
+
+<body>
+
+    <%- include('./includes/side-nav.ejs') %>
+
+        <div class="wrapper">
+            <input type="hidden" name="editing" id="editing" value="<%=editing%>">
+            <input type="hidden" name="order" id="order" value="<%=order%>">
+            <section class="head">
+                <div class="flex f-space-between">
+                    <h2>طلب جديد</h2>
+                    <!--Main Actions -->
+                    <aside class="flex f-space-between">
+
+                        <a id="submitSales" class="btn bg-w save-btn">انشئ</a>
+                    </aside>
+                </div>
+            </section>
+            <main class="grid g-two">
+
+                <div class="items-wrapper p-medium p-relative">
+
+                    <div class="flex f-space-between">
+                        <h3>المنتجات</h3>
+                        <i class="fas fa-filter toggle-items-filter"></i>
+                    </div>
+                    <div class="filter none">
+                        <div class="form-group search-name-wrapper ">
+                            <label for="">الاسم/الكود</label>
+                            <input type="text" name="search-name" id="search-name" placeholder="ابحث في المنتجات"
+                                class="form-control">
+                        </div>
+
+                    </div>
+                    <div class="products-wrapper">
+                        <ul class="groups ">
+                            <li class="options-groups_item mainGroup btn-small btn" data-groupname="all">الجميع</li>
+                        </ul>
+                        <div id="allProducts" class="p-relative grid g-three">
+                            <img class="loading loading-small " src="/admin/images/loading(3).svg">
+                            <div class="fallback none">
+                                <h3>لا يوجد بعد</h3>
+                                <a style="display:block" href="/admin/inventory?lang=ar">اضف الان</a>
+                            </div>
+                            <div class="popUp none">
+                                <div class="container">
+                                    <i id="closeSelectSpicificType"
+                                        class="fas fa-times closeQuantityBox close font-s c-b"></i>
+                                    <p>المكيه</p>
+                                    <div class="flex">
+                                        <input class="form-control" type="number" id="quantity" name="quanitity" min="1"
+                                            value="1" placeholder="Define quantity">
+                                        <button id="confirmProduct" class=" confirmItem btn btn-success">تأكيد</button>
+                                    </div>
+                                    <div class="units none">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="choosenitems" class="p-large">
+                        <h3>العناصره المختاره</h3>
+                        <span>لا يوجد..</span>
+                    </div>
+                </div>
+                <div class="infoWrapper p-medium ">
+
+                    <div class="shipping-info">
+                        <div class="form-group">
+                            <label style="cursor: pointer;" for="deliveryDate">تاريخ النوصيل</label>
+                            <input style="cursor: pointer;" name="deliveryDate" id="deliveryDate" type="date">
+                        </div>
+                        <div class="drobdown_list m-large">
+                            <h3>المنطقه</h3>
+                            <div class="from-group list-btn flex">
+                                <input type="text" class="form-control list-input" data-list="allZones"
+                                    name="clientName" id="" placeholder="ابحث" autocomplete="off">
+                            </div>
+                            <div class="list-box customer-box none" data-list-name="allZones">
+                                <img class="loading  loading-small none" src="/admin/images/loading(3).svg">
+                                <ul name="" id="all-zones" data-list="allZones"></ul>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="street">رقم العقار و اسم الشارع</label>
+                            <input type="text" class="form-control" name="street" id="street"
+                                placeholder="رقم العقار و اسم الشارع">
+                        </div>
+                        <div class="form-group">
+                            <label for="floor">الدور</label>
+                            <input type="text" class="form-control" name="floor" id="floor"
+                                placeholder="الدور">
+                        </div>
+                        <div class="form-group">
+                            <label for="apartment">رقم الشقه</label>
+                            <input type="text" class="form-control" name="apartment" id="apartment"
+                                placeholder="رقم الشقه">
+                        </div>
+  
+
+                    </div>
+
+                    <div class=" client-info_basics">
+                        <div class="drobdown_list m-large">
+                            <h3>العماء</h3>
+                            <div class="from-group list-btn flex">
+                                <input type="text" class="form-control list-input" data-list="allCustomers"
+                                    name="clientName" id="" placeholder="ابحث" autocomplete="off">
+                            </div>
+                            <div class="list-box customer-box none" data-list-name="allCustomers">
+                                <img class="loading  loading-small none" src="/admin/images/loading(3).svg">
+                                <ul name="" id="all-customers" data-list="allCustomers"></ul>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">رقم التواصل</label>
+                            <input type="text" class="form-control" name="phone" id="phone"
+                                placeholder="رقم التواصل..">
+                        </div>
+
+                        <div class="drobdown_list m-large none">
+                            <h3>Promos</h3>
+                            <div class="from-group list-btn flex">
+                                <input type="text" class="form-control list-input" data-list="allPromos"
+                                    name="clientName" id="" placeholder="Search..." autocomplete="off">
+                            </div>
+                            <div class="list-box customer-box none" data-list-name="allPromos">
+                                <img class="loading  loading-small none" src="/admin/images/loading(3).svg">
+                                <ul name="" id="all-promos" data-list="allPromos"></ul>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="sales-info_advanced none" style="padding: var(--main-padding)">
+                        <h3>More Info</h3>
+                        <div class="form-group">
+                            <label for="leadSource">Lead Source</label>
+                            <select name="leadSource" id="leadSource" class="form-control">
+                                <option value="default">Default</option>
+                                <option value="call">Call</option>
+                                <option value="advertisement">Advertisement</option>
+                                <option value="website">Website</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="descriptionBox">
+                            <label for="description">Sales Description</label>
+                            <input type="text" name="description" id="description" class="form-control"
+                                placeholder="Description...">
+                        </div>
+                    </div>
+
+                    <div>
+
+
+                        <div class="sales-info_preview">
+                            <span class="untaxed-cost">
+                                <b>Total:</b>0</span>
+                            <span class="shipping-cost">
+                                <b>Shipping:</b> 0</span>
+
+                            <span class="total-cost">
+                                <b>Grand Total:</b>0</span>
+                        </div>
+                    </div>
+
+
+                    <!-- <button class="btn btn-success" id="submitSales">
+                        <p>Save</p>
+                        <img class="loading" src="/admin/images/loading(3).svg">
+                    </button> -->
+                    <!-- <div class="center-con btn-success" id="submitSales">
+                        <div class="round">
+                            <div id="cta">
+                                <span class="arrow primera next "></span>
+                                <span class="arrow segunda next "></span>
+                            </div>
+                        </div>
+                        <img class="loading" src="/admin/images/loading(3).svg">
+                    </div> -->
+                    <div class="invoice-wrapper">
+                        <i class="fas fa-times close close-invoice" style="color:black"></i>
+                    </div>
+                </div>
+                <canvas class="img-responsive none" id="barcode"></canvas>
+
+            </main>
+        </div>
+        <%- include('./includes/scripts.ejs') %>
+
+            <script src="/admin/modules/jquery.scannerdetection.js"></script>
+            <script src="/admin/modules/JsBarcode.all.min.js"></script>
+            <script src="/admin/modules/components/general/invoices.js"></script>
+            <script src="/admin/modules/components/products.js"></script>
+            <script src="/admin/modules/interface/new-order.js"></script>
+            <!-- <script src="/modules/notifications.js"></script> -->
+
+</body>
+
+</html>

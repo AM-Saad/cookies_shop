@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1">
+    <meta name="author" content="">
+    <!-- Custom styles for this template -->
+    <%- include('./templates_includes/template_styles.ejs') %>
+
+        <link href="/shop/css/home.css" rel="stylesheet">
+        <link href="/shop/css/products.css" rel="stylesheet">
+        <style>
+        </style>
+</head>
+
+<body class="home-page">
+    <!-- Search -->
+
+    <%- include('./templates_includes/search.ejs') %>
+
+        <!-- Search -->
+
+
+        <!-- NAViGATION -->
+
+        <%- include('./templates_includes/nav.ejs') %>
+
+            <!-- NAViGATION -->
+
+            <div class="wrapper">
+                <header class="section">
+                    <img class="hero" src="/shop/images/main.jpg" alt="">
+                </header>
+                <div class="header-intro">
+                    <p>Create your elegant & lovely cookie box today!</p>
+                    <img class="arrow-down" src="https://media.giphy.com/media/LORALOSlybTNZhWsLQ/source.gif" alt="">
+                    <div class="flex">
+                        <a class="btn hvr-bounce-to-left shop-now" href="/shop">Shop Now</a>
+                    </div>
+                </div>
+                <!-- <section class="section">
+                    <div class="category_items">
+                        <ul class="products-row">
+                            <li class="product-card product">
+                            </li>
+                        </ul>
+                    </div>
+
+                </section>
+ -->
+                <!-- <section class="section" id="category">
+                    <%- include('./templates_includes/categories.ejs') %>
+                </section> -->
+
+                <% if(categories.length> 0){ %>
+                    <section class="section featured">
+                        <h2><i class="fas fa-star m-r-3"></i>Cookies Categories</h2>
+
+                        <ul class="products-row">
+                            <%categories.forEach(i=> { %>
+                                <li class="product-card product">
+
+                                    <a href="/products/<%= i.name%>" class="product-img">
+                                        <img src="<%=i.image%>" alt="">
+                                    </a>
+                                    <div class="product-body">
+                                        <div class="product-body_info">
+                                            <h3 class="product-body_info_title">
+                                                <a style="text-transform: capitalize;" href="/products/<%= i.name%>">
+                                                    <%=i.name%>
+                                                </a>
+                                            </h3>
+                                        </div>
+                                    </div>
+                                </li>
+                                <%})%>
+                        </ul>
+                    </section>
+                    <%}%>
+                        <section class="section">
+                            <%categoryProducts.forEach(c=> { %>
+                                <%if(c.items.length> 0) { %>
+                                    <div class="category_items">
+                                        <div class="">
+                                            <h3>
+                                                <%= c.name %>
+                                            </h3>
+                                        </div>
+                                        <ul class="category_products">
+                                            <%c.items.forEach(i=> { %>
+
+                                                <li class="product-card product">
+                                                    <input type="hidden" name="itemId" value="<%=i._id%>">
+                                                    <a href="/product-details/<%= i._id%>" class="product-img">
+                                                        <img src="<%=i.images[0]%>" alt="">
+                                                    </a>
+                                                    <a href="/product-details/<%= i._id%>" class="product-body">
+                                                        <div class="product-body_info">
+                                                            <span class="product-body_info_price">
+                                                                <% for(o of i.attributes[0].options) { %>
+                                                                    EGP <%= (i.info.sellingPrice +
+                                                                        parseInt(o.price,10))%> <span>-</span>
+                                                                        <%}%>
+                                                            </span>
+                                                        </div>
+                                                        <div class="flex f-space-around product-body_actions">
+                                                            <%if(i.attributes.length> 0) { %>
+                                                                <div class="btn product-body_addcart ">Select Size</div>
+                                                                <%}else { %>
+                                                                    <div class="btn product-body_addcart add-cart">
+                                                                        <div class="lds-hourglass none"></div>
+                                                                        <span>
+                                                                            Add To Card
+                                                                        </span>
+                                                                    </div>
+                                                                    <%}%>
+                                                                        <div
+                                                                            class="btn product-body_viewbtn get-product">
+                                                                            <i class="fas fa-eye"></i>
+                                                                        </div>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                                <%})%>
+
+                                        </ul>
+                                    </div>
+                                    <%}%>
+                                        <%})%>
+
+                        </section>
+                        <%- include('./templates_includes/cart.ejs') %>
+                            <div class="modal-container none">
+                                <div class="modal modal--bg"></div>
+
+                            </div>
+
+            </div>
+
+            <%- include('./templates_includes/footer.ejs') %>
+                <%- include('./templates_includes/scripts.ejs') %>
+
+
+                    <script data-reload="true" src="/shop/modules/quick_view.js"></script>
+                    <script data-reload="true" src="/shop/modules/products.js"></script>
+</body>
+
+</html>

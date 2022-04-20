@@ -1,0 +1,87 @@
+.texted-page {
+    padding: 30px 0 80px;
+}
+
+
+.texted-page .policy-content {
+    font-size: 0;
+    margin-top: 40px;
+}
+
+.texted-page .policy-content .text {
+    display: inline-block;
+    vertical-align: top;
+    width: 50%;
+}
+
+.page-title {
+    margin-bottom: 10px;
+    border: none;
+    padding-bottom: 20px;
+}
+
+.page-title h1 {
+    font-size: 36px;
+    text-transform: capitalize;
+    position: relative;
+    line-height: 48px;
+    font-weight: 600;
+    margin: 0;
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+}
+
+.texted-page .policy-content .text .page-title p {
+    line-height: 2.2;
+    font-size: 18px;
+    margin-top: 10px;
+    color: #eb48479e;
+}
+
+.texted-page .policy-content .text .items li {
+    border-left: 6px solid rgba(130, 148, 93, 0.3);
+    padding-left: 18px;
+}
+
+.texted-page .policy-content .text .items li:not(:first-child) {
+    margin-top: 34px;
+}
+
+.texted-page .policy-content .text .items li h4 {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: .28px;
+    color: #121212;
+    line-height: 1;
+}
+
+.texted-page .policy-content .text .items li p {
+    font-size: 16px;
+}
+
+.texted-page .policy-content .pic {
+    display: inline-block;
+    vertical-align: top;
+    width: 50%;
+    padding-top: 20px;
+    padding-left: 30px;
+}
+
+.texted-page .policy-content .pic img {
+    display: block;
+    box-shadow: 0 2px 2px 0 rgb(0 0 0 / 15%);
+    border-radius: 2px;
+    max-width: 100%;
+}
+
+@media screen and (max-width: 767px) {
+    .texted-page .policy-content .text {
+        width: 100%;
+    }
+    .texted-page .policy-content .pic {
+        width: 100%;
+        margin-top: 30px;
+        padding-left: 0;
+    }
+}

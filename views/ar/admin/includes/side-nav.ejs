@@ -1,0 +1,53 @@
+<nav>
+
+    <% if(isAuth) { %>
+        <ul id="top-menu">
+            <span class="dashboard-menu-icon menu_icons_item"><i class="fas fa-bars"></i></span>
+            <div class="flex">
+                <a href="<%=path%>?lang=en" class="lang">
+                    <img style="margin-bottom: -10px; height:30px"
+                        src="https://www.lineex.es/wp-content/uploads/2016/06/english-flag.png" alt="">
+                </a>
+                <a href="/admin/setting?lang=ar"> <i class="fas fa-cogs menu_icons_item"></i></a>
+                <a href="/logout"> <i class="fas fa-sign-out-alt menu_icons_item"></i></a>
+                <!-- <i class="fas fa-bell menu_icons_item"></i> -->
+            </div>
+        </ul>
+        <ul id="dashboard-menu" class="menu-closed">
+            <div id="dashboard-menu_header">
+                <span class="dashboard-menu-icon menu_icons_item"><i class=" fas fa-bars"></i></span>
+                <div class="logo m-l-3">
+                    <a href="/admin/dashboard?lang=ar"><img src="/user/images/icon.png" alt="" srcset=""></a>
+                </div>
+            </div>
+            <a href="/admin/dashboard?lang=ar"
+                class="dashboard-menu_item <%= path === '/dashboard' ? 'active' : '' %>"><b>الرئيسيه</b></a>
+            <a href="/admin/orders?lang=ar"
+                class="dashboard-menu_item <%= path === '/orders' ? 'active' : '' %>"><b>الطلبات</b></a>
+            <a href="/admin/inventory?lang=ar"
+                class="dashboard-menu_item <%= path === '/inventory' ? 'active' : '' %>"><b>المخزن</b></a>
+            <a href="/admin/customers?lang=ar"
+                class="dashboard-menu_item <%= path === '/customers' ? 'active' : '' %>"><b>العملاء</b></a>
+            <!-- <a href="/admin/bills"
+                class="dashboard-menu_item <%= path === '/bills' ? 'active' : '' %>"><b>المصاريف</b></a> -->
+            <a href="/admin/category?lang=ar"
+                class="dashboard-menu_item <%= path === '/category' ? 'active' : '' %>"><b>التصنيفات</b></a>
+            <a href="/admin/promos?lang=ar"
+                class="dashboard-menu_item <%= path === '/promos' ? 'active' : '' %>"><b>الرموز
+                    الترويجيه</b></a>
+            <a href="/admin/zones?lang=ar" class="dashboard-menu_item <%= path === '/zones' ? 'active' : '' %>"><b>المناطق</b></a>
+            <a href="/admin/reports?lang=ar"
+                class="dashboard-menu_item <%= path === '/reports' ? 'active' : '' %>"><b>التقارير</b> </a>
+            <a href="/admin/settings?lang=ar"
+                class="dashboard-menu_item <%= path === '/settings' ? 'active' : '' %>"><b>الاعدادت</b> </a>
+            <a class="dashboard-menu_item" href="/logout"><b>تسجيل خروج</b> <img src="/admin/images/exit.png"
+                    alt=""></a>
+            <div id="dashboard-menu_bottom">
+                <a href="/admin/dashboard?lang=ar">
+                    <%=user.name%>
+                </a>
+            </div>
+        </ul>
+        <%}%>
+
+</nav>

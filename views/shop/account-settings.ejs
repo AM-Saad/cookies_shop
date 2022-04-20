@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Custom styles for this template -->
+    <%- include('./templates_includes/template_styles.ejs') %>
+    <link rel="stylesheet" href="/shop/css/settings.css" />
+
+
+</head>
+
+
+<body class="home-page is-dropdn-click">
+
+    <%- include('./templates_includes/search.ejs') %>
+
+
+    <!-- NAViGATION -->
+
+    <%- include('./templates_includes/nav.ejs') %>
+
+    <!-- NAViGATION -->
+
+
+    <div class="wrapper">
+        <section class="section">
+
+            <h1>My Account</h1>
+            <%- include('../includes/message.ejs') %>
+
+            <form action="/account-settings/info" method="post">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+                <div class="form-control">
+                    <label for="mobile">Phone</label>
+                    <input type="text" name="mobile" id="mobile" value="<%=user.mobile %>" required>
+                </div>
+                <div class="form-control">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name" value="<%=user.name %>" required>
+                </div>
+
+                <button class="btn btn-success">Update</button>
+            </form>
+            <form action="/account-settings/password" method="post">
+                <h3>Change Password</h3>
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+                <div class="form-control">
+                    <label for="oldPassword">Old Password</label>
+                    <input type="password" name="oldPassword" id="oldPassword" required>
+                </div>
+                <div class="form-control">
+                    <label for="newPassword">New Password</label>
+                    <input type="password" name="newPassword" id="newPassword" required>
+                </div>
+                <div class="form-control">
+                    <label for="confirmPassword">Confirm New Password</label>
+                    <input type="password" name="confirmPassword" id="confirmPassword" required>
+                </div>
+                <button class="btn btn-success" type="submit">Change</button>
+            </form>
+        </section>
+
+    </div>
+    <%- include('./templates_includes/footer.ejs') %>
+
+    <%- include('./templates_includes/scripts.ejs') %>
+
+    <script data-reload="true" src="/shop/modules/quick_view.js"></script>
+    <script data-reload="true" src="/shop/modules/products.js"></script>
+</body>
+
+</html>

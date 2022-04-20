@@ -1,0 +1,36 @@
+<%- include('./includes/head2.ejs') %>
+</head>
+
+<body>
+    <div class="wrapper">
+        <%- include('./includes/top-bar.ejs') %>
+        <%- include('./includes/navigation2.ejs') %>
+
+        <main>
+            <% if(path === '/Reset-Request'){ %>
+            <div class="thanks">
+                <div>
+                    <h1>Reset Password Submited</h1>
+                    <p>Go To Your Email NOW To Confirm Reset Your Passowrd.</p>
+
+                </div>
+                <img src="/images/shopThumbnil.svg" alt="" srcset="">
+            </div>
+            <% }  else{ %>
+            <div class="thanks">
+                <div>
+                    <h1>Thank You To Be One Of Our Community</h1>
+                    <p>Login Now To Verify Account.</p>
+                    <a href="/login">Login</a>
+
+                </div>
+                <img src="/images/shopThumbnil.svg" alt="" srcset="">
+            </div>
+            <% } %>
+        </main>
+        <%- include('../includes/footer.ejs') %>
+    </div>
+    <%- include('../includes/scripts.ejs') %>
+</body>>
+
+</html>

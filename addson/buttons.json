@@ -1,0 +1,54 @@
+[
+  {
+    "info": {
+      "name": "Buttons"
+    },
+    "items": [
+      {
+        "name": "default",
+        "group": "actions",
+        "content": "<button class='btn-outline default '><i class='fas fa-home'></i><span>default</span></button>"
+      },
+      {
+        "name": "primary",
+        "group": "actions",
+        "content": "<button class='btn-outline primary'><i class='fas fa-exclamation-circle'></i><span>primary</span></button>"
+      },
+      {
+        "name": "success",
+        "group": "actions",
+        "content": "<button class='btn-outline success'><i class='fas fa-check-circle'></i><span>success</span></button>"
+      },
+      {
+        "name": "warning",
+        "group": "actions",
+        "content": "<button class='btn-outline warning'><i class='fas fa-exclamation-triangle'></i><span>warning</span></button>"
+      },
+      {
+        "name": "danger",
+        "group": "actions",
+        "content": "<button class='btn-outline danger'><i class='fas fa-times-circle'></i><span>danger</span></button>"
+      },
+      {
+        "name": "button_1",
+        "group": "themed",
+        "content": "<a class='themed button_1'> <span>hover</span><div class='back'></div></a>"
+      },
+      {
+        "name": "button_2",
+        "group": "themed",
+        "content": "<a class='themed button_2'> <span>hover</span><div class='back'></div></a>"
+      },
+      {
+        "name": "button_3",
+        "group": "themed",
+        "content": "<a class='themed button_3'> <span>hover</span><div class='back'></div></a>"
+      },
+      {
+        "name": "button_4",
+        "group": "themed",
+        "content": "<a class='themed button_4'> <span>hover</span><div class='back'></div></a>"
+      }
+    ]
+  }
+]

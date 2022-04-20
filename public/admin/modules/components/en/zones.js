@@ -1,0 +1,61 @@
+function createitemBox(c) {
+    $('.content .items').append(`
+    <div class="content-item btn_hover_effect ">
+        <div class="content-item_body">
+            <p>${c.name}</p>
+            <p>${c.zoneId}</p>
+            <p>${c.shipping} EGP</p>
+            <input type="hidden" name="zoneId" value="${c._id}">
+        </div>
+    </div>
+  `)
+}
+
+function createSingleItem(c, session) {
+    $('.single-item').remove()
+    $('main').append(`
+        <div class="single-item scaleable ">
+        <input type="hidden" name="zoneId" value="${c._id}">
+        <div class="inside-wrapper">
+                    <i class="fas fa-times font-xl close close-single-item"></i>
+                    <div class="single-item_all_actions">
+                        <a class="btn bg-w single-item_actions edit-zone">Edit</a>
+                        <a class="btn btn-danger single-item_actions delete-zone">Delete Zone </a>
+                    </div>
+                    <div class="single-item_basics bg-lightgray flex f-space-around">
+    
+                    </div>
+                    <div class="grid g-two">
+                    
+                        <div class="single-item-core">
+                            <div class="info single-item_name"> <h3>Zone Name: ${c.name}</h3></div>
+                            <div class="info"><p>Zone ID: ${c.zoneId || 'Unknown '} </p></div>
+                            <div class="info"><p>Government : ${c.governorate || 'Unknown'} </p ></div>
+                            <div class="info"><p>Shipping Price: ${c.shipping + 'EGP' || 'Unknown'} </p></div>
+                       
+                        </div>
+
+                    </div>
+
+    <div class="single-item-stock">
+    </div>
+                </div >
+            </div >
+    `)
+    setTimeout(() => { $('.single-item').addClass('scale') }, 100);
+}
+
+
+function orderItem(o) {
+    $('.customer-shipments .inside-wrapper').append(`
+    < div class="p-medium m-b-3 order bg-lightgray border-1-g" style = "cursor:pointer" >
+        <input type="hidden" value="${o.id}" name="orderId">
+            <div class="flex f-space-around ">
+                <div> ${o.date}</div>
+                <div> رقم الشحنه: ${o.shipmentNo}</div>
+                <div> حاله الشحنه: ${o.status.text}</div>
+            </div>
+            <div class="itemsBox bg-lightgray p-medium none"></div>
+    </div>
+`)
+}

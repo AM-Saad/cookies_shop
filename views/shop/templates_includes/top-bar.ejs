@@ -1,0 +1,32 @@
+<div class="top-bar">
+    <ul class="top-bar_list">
+      <% if (!isAuthenticated) { %>
+        <li class="top-bar_list-item"><a href="/login">Login</a></li>
+      <% } %>
+      <% if (isAuthenticated) { %>
+        <li class="top-bar_list-item"><a href="/logout">Logout</a></li>
+      <% } %>
+  
+      <li class="top-bar_list-item"> <a href=" /my-account/orders">My Account</a> </li>
+      <li class="top-bar_list-item"><a href="/admin/login">Administration</a></li>
+    </ul>
+    <ul class="top-bar_list">
+  
+      <li class="top-bar_list-item">
+        <i class="fas fa-shipping-fast"></i>
+  
+        <span>Shipping Next Day Maximum</span>
+      </li>
+      <li class="top-bar_list-item">
+        <i class="far fa-credit-card"></i>
+  
+        <span>Credit Card Or Pay Indoor</span>
+      </li>
+      <li class="top-bar_list-item">
+        <i class="fas fa-retweet"></i>
+  
+        <span><a href="/terms">Read Refund Policy</a></span>
+      </li>
+    </ul>
+  
+  </div>

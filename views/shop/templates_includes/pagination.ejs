@@ -1,0 +1,20 @@
+<section class="section pagination flex f-start">
+    <% if(currentPage !== 1 && prevPage !== 1) { %>
+    <a href="<%if(sub){ %>?sub=<%= sub %>&&page=1 <% } else { %> ?page=1 <%} %>" class="btn btn-small">1</a>
+    <% } %>
+    <% if(hasPrevPage) { %>
+    <a href=" <%if(sub){%>?sub=<%= sub %>&&page=<%= prevPage %> <%} else {%> ?page=<%= prevPage %> <%} %>"
+        class="btn btn-small"><%= prevPage %></a>
+    <% } %>
+    <a href="<%if(sub){%>?sub=<%=sub%>&&page=<%= currentPage %> <%} else {%> ?page=<%= currentPage %> <%} %>"
+        class="btn btn-small active"><%= currentPage %></a>
+    <% if(hasNextPage) { %>
+    <a href="<%if(sub){%>?sub=<%=sub%>&&page=<%= nextPage %> <%} else {%> ?page=<%= nextPage %> <%} %>"
+        class="btn btn-small"><%= nextPage %></a>
+    <% } %>
+    <% if(lastPage !== currentPage && nextPage !== lastPage) { %>
+
+    ...<a href="<%if(sub){%>?sub=<%=sub%>&&page=<%= lastPage %> <%} else {%> ?page=<%= lastPage %> <% } %>"
+        class="btn btn-small">Last Page</a>
+    <% }%>
+</section>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Custom styles for this template -->
+    <%- include('./templates_includes/template_styles.ejs') %>
+        <link href="/shop/css/about.css" rel="stylesheet">
+        <link href="/shop/css/contact.css" rel="stylesheet">
+
+</head>
+
+
+<body class="home-page is-dropdn-click">
+    <%- include('./templates_includes/search.ejs') %>
+
+        <!-- NAViGATION -->
+
+        <%- include('./templates_includes/nav.ejs') %>
+
+            <!-- NAViGATION -->
+            <div class="wrapper">
+                <section id="contact">
+                    <h1> Contact Us</h1>
+                    <%- include('../includes/message.ejs') %>
+
+                    <div class="grid g-two p-medium">
+
+                        <div>
+                            <p><i class="fas fa-mobile m-r-3" style="color: var(--scnd-color)"></i>010-9732-9968</p>
+
+                            <p><i class="fas fa-envelope-open m-r-3" style="color: var(--scnd-color)"></i>cookielicious.eg@gmail.com</p>
+
+
+                        </div>
+
+                        <div>
+                            <img class="w-75 block m-auto" src="/shop/images/logo.jpg" alt="">
+                        </div>
+                    </div>
+                    <h2>Your message is important to us</h2>
+
+                        <form class="auth-form" action="/message" method="POST">
+
+                            <div class="auth-form_normal">
+                                <div class="form-control">
+                                    <label for="name">Your Name </label>
+                                    <input type="name" name="name" id="name" required>
+                                </div>
+                                <div class="form-control">
+                                    <label for="mobile">Mobile</label>
+                                    <input type="text" name="mobile" id="mobile" required>
+                                </div>
+                                <div class="form-control">
+                                    <label for="message">Your Message</label>
+                                    <textarea name="message" id="message" rows="5px" required></textarea>
+                                </div>
+                                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                <button class="btn  hvr-bounce-to-left" style="background-color: var(--scnd-color);" type="submit">Send</button>
+
+                            </div>
+
+                        </form>
+                </section>
+            </div>
+            <%- include('./templates_includes/footer.ejs') %>
+
+                <%- include('./templates_includes/scripts.ejs') %>
+
+</body>
+
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Custom styles for this template -->
+    <%- include('../shop/templates_includes/template_styles.ejs') %>
+    <link href="/shop/css/auth.css" rel="stylesheet">
+
+</head>
+
+
+<body class="home-page is-dropdn-click">
+
+    <!-- NAViGATION -->
+
+    <%- include('../shop/templates_includes/nav.ejs') %>
+
+    <!-- NAViGATION -->
+
+    <div class="wrapper">
+
+        <section class="section">
+            <div class="forms">
+                <div class="flex actions">
+                    <span class="btn <%= path !='/signup' ? 'active' : ''%> " data-form="login">Login</span>
+                    <span class="btn <%= path =='/signup' ? 'active' : ''%> " data-form="signup">Sign up</span>
+                </div>
+                <div id="loginForm" class="login form <%= path =='/signup' ? 'none' : ''%> ">
+                    <div class="form-img">
+                    </div>
+                    <h2 class="text-center">Login</h2>
+                    <p>If you have an account with us, please log in.</p>
+                    <%- include('../includes/message.ejs') %>
+                    <div class="form-wrapper ">
+                        <form action="/login" method="POST">
+                            <div class="form-control">
+                                <input type="text" name="mobile" class="form-control" placeholder="Your Mobile"
+                                    required>
+                            </div>
+                            <div class="form-control">
+                                <input type="password" class="form-control" name="password" placeholder="Password"
+                                    required>
+                            </div>
+                            <p class="text-uppercase"><a href="#" class="js-toggle-forms">Forgot Your
+                                    Password?</a></p>
+                            <div class="clearfix">
+                                <input id="remember" name="remember" type="checkbox" checked="checked">
+                                <label for="remember">Remember me</label>
+                            </div>
+                            <button type="submit" class="btn">Sign in</button>
+                        </form>
+                    </div>
+                </div>
+                <div id="signUpForm" class="signup form <%= path != '/signup' ? 'none' : ''%> ">
+                    <div class="form-img">
+                    </div>
+                    <h2 class="text-center">SIGN Up</h2>
+                    <%- include('../includes/message.ejs') %>
+                    <div class="form-wrapper ">
+                        <form action="/signup" method="POST">
+                            <div class="form-control">
+                                <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+                            </div>
+                            <div class="form-control">
+                                <input type="text" name="mobile" class="form-control" placeholder="Your Mobile"
+                                    required>
+                            </div>
+                            <div class="form-control">
+                                <input type="password" class="form-control" name="password" placeholder="Password"
+                                    required>
+                            </div>
+                            <div class="form-control">
+                                <input type="password" class="form-control" name="confirmPassword"
+                                    placeholder="Confirm Password" required>
+                            </div>
+                            <input type="hidden" name="cart" id="cart">
+
+                            <button type="submit" class="btn">Sign Up</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <%- include('../shop/templates_includes/cart.ejs') %>
+    </div>
+
+    <%- include('../shop/templates_includes/scripts.ejs') %>
+    <script>
+        let cart = localStorage.getItem('c_s')
+        $('#cart').val(cart)
+    </script>
+</body>
+
+</html>

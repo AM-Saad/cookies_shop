@@ -1,0 +1,51 @@
+<nav>
+
+    <% if(isAuth) { %>
+        <ul id="top-menu">
+            <span class="dashboard-menu-icon menu_icons_item"><i class="fas fa-bars"></i></span>
+            <div class="flex">
+                <a href="<%=path%>?lang=ar" class="lang">
+                    <img style="margin-bottom: -10px; height:30px" src="https://flagpedia.net/data/flags/w580/eg.png" alt="">
+                </a>
+                <a href="/admin/settings"> <i class="fas fa-cogs menu_icons_item"></i></a>
+                <a href="/logout"> <i class="fas fa-sign-out-alt menu_icons_item"></i></a>
+                <!-- <i class="fas fa-bell menu_icons_item"></i> -->
+            </div>
+        </ul>
+        <ul id="dashboard-menu" class="menu-closed">
+            <div id="dashboard-menu_header">
+                <span class="dashboard-menu-icon menu_icons_item"><i class=" fas fa-bars"></i></span>
+                <div class="logo m-l-3">
+                    <a href="/admin/dashboard"><img src="/user/images/icon.png" alt="" srcset=""></a>
+                </div>
+            </div>
+            <a href="/admin/dashboard?lang=en"
+                class="dashboard-menu_item <%= path === '/admin/dashboard' ? 'active' : '' %>"><b>Dashboard</b></a>
+            <a href="/admin/orders?lang=en"
+                class="dashboard-menu_item <%= path === '/admin/orders' ? 'active' : '' %>"><b>Orders</b></a>
+            <a href="/admin/inventory?lang=en"
+                class="dashboard-menu_item <%= path === '/admin/inventory' ? 'active' : '' %>"><b>Products</b></a>
+            <a href="/admin/customers?lang=en"
+                class="dashboard-menu_item <%= path === '/admin/customers' ? 'active' : '' %>"><b>Customers</b></a>
+            <!-- <a href="/admin/bills"
+                class="dashboard-menu_item <%= path === '/admin/bills' ? 'active' : '' %>"><b>المصاريف</b></a> -->
+            <a href="/admin/category?lang=en"
+                class="dashboard-menu_item <%= path === '/admin/category' ? 'active' : '' %>"><b>Categories</b></a>
+            <a href="/admin/promos?lang=en"
+                class="dashboard-menu_item <%= path === '/admin/promos' ? 'active' : '' %>"><b>Promos</b></a>
+            <a href="/admin/zones?lang=en"
+                class="dashboard-menu_item <%= path === '/admin/zones' ? 'active' : '' %>"><b>Zones</b></a>
+            <a href="/admin/reports?lang=en"
+                class="dashboard-menu_item <%= path === '/admin/reports' ? 'active' : '' %>"><b>Reports</b> </a>
+            <a href="/admin/settings?lang=en"
+                class="dashboard-menu_item <%= path === '/admin/settings' ? 'active' : '' %>"><b>Settings</b> </a>
+            <a class="dashboard-menu_item" href="/logout"><b> Logout</b> <img src="/admin/images/exit.png" alt=""></a>
+            <div id="dashboard-menu_bottom">
+                <a href="/admin/dashboard">
+                    <%=user.name%>
+                </a>
+            </div>
+        </ul>
+        <%}%>
+
+</nav>

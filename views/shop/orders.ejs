@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Custom styles for this template -->
+    <%- include('./templates_includes/template_styles.ejs') %>
+        <link href="/shop/css/orders.css" rel="stylesheet">
+
+</head>
+
+
+<body onload="getCart()" class="home-page is-dropdn-click">
+    <%- include('./templates_includes/search.ejs') %>
+
+        <!-- NAViGATION -->
+
+        <%- include('./templates_includes/nav.ejs') %>
+
+            <!-- NAViGATION -->
+
+            <div class="wrapper">
+                <div class="flex f-space-between">
+                    <h1>My Account</h1>
+                    <a href="/my-account/settings">Edit Account</a>
+                </div>
+
+                <section class="section">
+
+                    <% if (orders.length <=0) { %>
+                        <h1>Nothing Here!</h1>
+                        <% } else { %>
+                            <h2>Your Orders</h2>
+                            <div class="orders">
+                                <% orders.forEach(order=> { %>
+                                    <div class="orders__item">
+                                        <div class="flex">
+                                            <h2>Order ID: <%= order.serialNo %>
+                                            </h2>
+                                        </div>
+                                        <h3>Date: <%= order.date %>
+                                        </h3>
+                                        <h4>Your Items:</h4>
+                                        <ul class="orders__products">
+                                            <% order.items.forEach(product=> { %>
+                                                <li class="orders__products-item">
+                                                    <p>
+                                                        <%= product.name %> (<%= product.quantity %> * <%= product.price
+                                                                    %>)
+                                                                    <b>
+                                                                        <%= product.quantity * product.price%>
+                                                                    </b>
+                                                    </p>
+                                                </li>
+                                                <% }); %>
+                                        </ul>
+                                        <div class="money  f-space-between">
+                                            <p class="font-m "> <b>Shipping: EGP <%=
+                                                        order.order_info.shipping_details.price %></b></p>
+                                            <p class="font-m "> <b>Total: EGP <%= (order.totalPrice -
+                                                        order.order_info.shipping_details.price) %></b></p>
+                                            <p> <b>Grand: EGP <%=order.totalPrice%></b></p>
+                                        </div>
+                                    </div>
+
+                                    <% }); %>
+                            </div>
+                            <% } %>
+
+                </section>
+            </div>
+
+            <%- include('./templates_includes/scripts.ejs') %>
+
+</body>
+
+</html>

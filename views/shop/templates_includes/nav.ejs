@@ -1,0 +1,165 @@
+<div class="nav-wrapper">
+
+    <nav class="main-nav flex f-space-between">
+        <ul class="main-nav__item-list main">
+            <div class="main-nav__item logo flex">
+                <a href="/" class="block">
+                    <img src="/shop/images/logo.jpg" alt="Logo Image">
+                </a>
+                <a style="text-align: center;" class="d-block" href="/">Cookielicious</a>
+            </div>
+        </ul>
+        <ul class="main-nav__item-list auth p-relative">
+            <%- include('./top-bar.ejs') %>
+
+                <div class="flex f-space-between">
+                    <ul class="category_list flex">
+
+
+                        <li class="main-nav__item"><a href="/">Home</a></li>
+                        <li class="main-nav__item"><a href="/shop">Shop</a></li>
+                        <li class="main-nav__item"><a href="/about">About</a></li>
+                        <li class="main-nav__item"><a href="/contact">Contact</a></li>
+                        <% if (!isAdmin ) { %>
+
+                            <li class="main-nav__item"><a class="go-to-cart" href="/cart">Cart</a></li>
+                            <%}%>
+
+                    </ul>
+                    <div class="flex">
+                        <div class="user-actions">
+                            <% if (!isAdmin && path != '/checkout') { %>
+                                <li class="main-nav__item">
+                                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+                                    <a class=" " onclick="getCart(this)"><i class="fas fa-shopping-cart"></i></a>
+                                </li>
+                                <%}%>
+                                    <% if (isAuthenticated && !isAdmin) { %>
+                                        <li class="main-nav__item account">
+
+                                            <a href="/my-account/orders/"><i class="fas fa-user"></i></a>
+                                        </li>
+                                        <%}%>
+                                            <li class="main-nav__item">
+                                                <a class=" "><i class="fas fa-search opensearch"></i></a>
+                                            </li>
+                        </div>
+                        <div class="user-actions">
+                            <li class="main-nav__item sub-menu_button">
+                                <a class=" " href=""> <i class="fas fa-bars"></i></a>
+                            </li>
+                        </div>
+                    </div>
+
+                </div>
+        </ul>
+
+    </nav>
+
+    <nav class="mobile-nav">
+        <ul class="flex f-space-between">
+            <div class="main-nav__item logo flex">
+                <a href="/" class="block">
+                    <img src="/shop/images/logo.jpg" alt="Logo Image">
+                    <a style="text-align: center; font-weight:bold;" class="d-block" href="/">Cookielicious</a>
+
+                </a>
+            </div>
+            <div class="user-actions">
+                <li class="main-nav__item sub-menu_button">
+                    <a class=" " href=""> <i class="fas fa-bars"></i></a>
+                </li>
+                <% if (!isAdmin && path != '/checkout') { %>
+                    <li class="main-nav__item">
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                        <a class=" " onclick="getCart(this)"><i class="fas fa-shopping-cart"></i></a>
+                    </li>
+                    <% } %>
+                        <% if (isAuthenticated && !isAdmin) { %>
+                            <li class="main-nav__item account">
+                                <a href="/my-account/orders/"><i class="fas fa-user"></i></a>
+                            </li>
+                            <%}%>
+                                <!-- <li class="main-nav__item">
+                    <a class=" "><i class="fas fa-search opensearch"></i></a>
+                </li> -->
+                                <li class="main-nav__item install-btn none" id="install-btn">
+                                    <a class=" font-xs"><i class="fas fa-download"></i></a>
+                                </li>
+            </div>
+
+            <!-- <div class="user-actions f-end">
+                    <li class="main-nav__item">
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+                        <a class=" " onclick="getCart(this)"><i class="fas fa-shopping-cart"></i></a>
+                    </li>
+                </div> -->
+        </ul>
+    </nav>
+
+</div>
+
+
+<nav class="side-nav flex f-space-between">
+    <div id="pop-up_menu">
+        <div class="inner">
+            <div>
+                <img class="w-75 m-auto block" src="/shop/images/logo.jpg" alt="">
+            </div>
+            <ul class="side-nav_list">
+                <a class="side-nav_nested_cls none"> <i class="fas fa-arrow-left"></i></a>
+
+                <li class="side-nav_list_item"><a href="/">Home</a></li>
+                <li class="side-nav_list_item"><a href="/shop">Shop</a></li>
+                <li class="side-nav_list_item"><a href="/about">About</a></li>
+                <li class="side-nav_list_item"><a href="/contact">Contact</a></li>
+                <% if (!isAdmin && path != '/checkout') { %>
+
+                    <li class="side-nav_list_item"><a class="go-to-cart" href="/cart">Cart</a></li>
+
+                    <% } %>
+                        <% if (!isAuthenticated) { %>
+                            <li>
+                                <a href="/login">Login</a>
+                            </li>
+                            <% } %>
+                                <% if (isAuthenticated) { %>
+                                    <li>
+                                        <a href="/logout">Logout</a>
+                                    </li>
+                                    <% } %>
+            </ul>
+            <nav class="supporting-nav">
+
+                <div class="menu-header">
+                    <ul id="menu-supporting-1" class="menu">
+                        <% if (isAuthenticated) { %>
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-148"><a
+                                    href="/my-account/settings/">My Account</a></li>
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-148"><a
+                                    href="/my-account/orders/">My Orders</a></li>
+                            <% } %>
+
+                                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-148"><a
+                                        href="/about/">About Us</a></li>
+                                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-148"><a
+                                        href="/contact/">Contact Us</a></li>
+                                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7976"><a
+                                        href="/">Blog</a></li>
+                                <li
+                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-4788">
+                                    <a href="/policy">Delivery &amp; Returns Policy</a>
+                                </li>
+                                <li
+                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-4788">
+                                    <a href="/admin/dashboard">adminstration</a>
+                                </li>
+                    </ul>
+                </div>
+            </nav>
+            <a class="pop-up_menu_cls"> <i class="fas fa-times-circle modal__close"></i></a>
+        </div>
+    </div>
+</nav>

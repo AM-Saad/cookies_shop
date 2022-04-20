@@ -1,0 +1,301 @@
+
+
+.head {
+    margin: var(--l-margin) 0;
+    margin-top: 0;
+}
+
+.head p, .head h1 {
+    margin: var(--s-margin) 0;
+}
+
+.cart_items {
+    background: #fff;
+    padding: var(--l-padding);
+    overflow: scroll;
+    position: relative;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    box-shadow: var(--shadow3);
+}
+.cart_items h1{
+
+}
+
+.cart__item-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    margin: auto;
+    width: 100%;
+    transition: 1.5s ease-in-out all;
+    text-align: center;
+    padding: var(--m-padding);
+}
+
+.cart__item {
+    justify-items: flex-start;
+    align-items: center;
+    border-bottom: 1px solid var(--scnd-color);
+    background-color: #fff;
+    margin: 1rem 0;
+    padding: var(--m-padding) var(--s-padding);
+    position: relative;
+}
+
+.cart__item_main {}
+
+.cart__item h1 {
+    font-size: 1.2rem;
+    margin: 0;
+    color: var(--main-color);
+    padding: var(--m-padding)
+}
+
+.cart__item h2 {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+}
+
+.cart__item img {
+    width: 120px;
+    height: 120px;
+}
+
+.cart__item_info .quantity {
+    padding: 0 !important;
+    border: 0 !important;
+}
+
+.cart__item input {
+    background-color: transparent;
+    border: 0;
+    display: block;
+    /* text-align: left; */
+    font-size: 17px;
+}
+
+.cart__item input:focus {
+    outline: none;
+}
+
+
+
+::selection{
+  color: #fff;
+  background: var(--main-color);
+}
+.invalid{
+  border-color: red !important;
+}
+.valid{
+  border-color: rgb(68, 224, 68) !important;
+}
+.container{
+  max-width: 100%;
+  padding: var(--l-padding);
+  overflow: scroll;
+  position: relative;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  box-shadow: var(--shadow3);
+  overflow-y: scroll;
+  animation-name: animated;
+}
+.container header{
+  font-size: 35px;
+  font-weight: 600;
+  margin: 0 0 30px 0;
+}
+.container .form-outer{
+  width: 100%;
+  overflow: hidden;
+}
+.container .form-outer form{
+  display: flex;
+  width: 400%;
+}
+.form-outer form .page{
+  width: 25%;
+  transition: margin-left 0.3s ease-in-out;
+}
+.form-outer form .page .title{
+  text-align: left;
+  font-size: 25px;
+  font-weight: 500;
+}
+.form-outer form .page .field{
+  max-width: 100%;
+  height: 45px;
+  margin: 45px 0;
+  display: flex;
+  position: relative;
+}
+form .page .field label{
+  position: absolute;
+  top: -30px;
+  left:  0;
+  font-weight: 500;
+}
+form .page .field input{
+  height: 100%;
+  width: 100%;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  padding-left: 15px;
+  font-size: 18px;
+  text-align: left;
+}
+form .page .field select{
+  width: 100%;
+  padding-left: 10px;
+  font-size: 17px;
+  font-weight: 500;
+}
+form .page .field button{
+  width: 100%;
+  height: calc(100% + 5px);
+  border: none;
+  background: var(--main-color);
+  margin-top: -20px;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: 0.5s ease;
+}
+form .page .field button:hover{
+  background: #000;
+}
+form .page .btns button{
+  margin-top: -20px!important;
+}
+form .page .btns button.prev{
+  margin-right: 3px;
+  font-size: 17px;
+}
+form .page .btns button.next{
+  margin-left: 3px;
+}
+.container .progress-bar{
+  display: flex;
+  margin: 40px 0;
+  user-select: none;
+}
+.container .progress-bar .step{
+  text-align: center;
+  width: 33%;
+  margin: 0 5px;
+  position: relative;
+  overflow: hidden;
+  padding: 4px;
+}
+.container .progress-bar .step p{
+  font-weight: 500;
+  font-size: 18px;
+  color: #000;
+  margin-bottom: 8px;
+  text-align: left;
+}
+.progress-bar .step .bullet{
+  height: 25px;
+  width: 25px;
+  border: 2px solid #000;
+  display: block;
+  border-radius: 50%;
+  position: relative;
+  transition: 0.2s;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 25px;
+  position: relative;
+}
+.progress-bar .step .bullet.active{
+  border-color: var(--main-color);
+  background: var(--main-color);
+}
+.progress-bar .step .bullet span{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.progress-bar .step .bullet.active span{
+  display: none;
+}
+.progress-bar .step .bullet:before,
+.progress-bar .step .bullet:after{
+  position: absolute;
+  content: '';
+  bottom: 9px;
+  right: -60px;
+  height: 3px;
+  width: 58px;
+  z-index: 9999;
+  background: #262626;
+}
+.progress-bar .step .bullet.active:after{
+  background: var(--main-color);
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: animate 0.3s linear forwards;
+}
+@keyframes animate {
+  100%{
+    transform: scaleX(1);
+  }
+}
+.progress-bar .step:last-child .bullet:before,
+.progress-bar .step:last-child .bullet:after{
+  display: none;
+}
+.progress-bar .step p.active{
+  color: var(--main-color);
+  transition: 0.2s linear;
+}
+.progress-bar .step .check{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  font-size: 15px;
+  transform: translate(-50%, -50%);
+  display: none;
+}
+.progress-bar .step .check.active{
+  display: block;
+  color: #fff;
+}
+
+
+
+@keyframes animated {
+  from {
+      transform: translateY(-20px);
+  }
+  to {
+      transform: translateY(0);
+  }
+}
+
+
+@media only screen and (max-width: 768px){
+  .container{
+    padding: 50px 5px 10px 5px;
+  }
+
+}
+
+@media only screen and (min-width: 320px) and (max-width: 575px) and (orientation: portrait) {
+    .cart__item {
+        grid-template-columns: 1fr 1fr !important;
+        margin: var(--m-margin) auto;
+    }
+    .cart__item h3 {
+        font-size: 15px;
+    }
+    .cart__item input {
+        padding: var(--m-padding) 0;
+    }
+}

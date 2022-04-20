@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Custom styles for this template -->
+    <%- include('./shop/templates_includes/template_styles.ejs') %>
+    <link href="/shop/css/home.css" rel="stylesheet">
+
+</head>
+
+<body class="home-page">
+
+
+    <!-- NAViGATION -->
+
+
+    <!-- NAViGATION -->
+
+    <div class="wrapper">
+        <div class="error-pages">
+            <h1>500</h1>
+            <p>Error Occurred! <br> We're Sorry But Something Went Wrong And We're Working On It, Please Try Agin Later
+                :(
+            </p>
+            <img src="/images/500.svg" alt="">
+            <button class="btn" onclick="goBack()">Go Back</button>
+
+            <script>
+                function goBack() {
+                    window.history.back();
+                }
+            </script>
+        </div>
+    </div>
+
+
+
+    <script data-reload="true" src="/shop/modules/quick_view.js"></script>
+    <script data-reload="true" src="/shop/modules/products.js"></script>
+</body>
+
+</html>
+    
+

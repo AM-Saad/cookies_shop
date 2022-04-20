@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <%- include('./includes/styles.ejs') %>
+        <link rel="stylesheet" href="/admin/css/orders.css" />
+
+</head>
+
+<body>
+    <%- include('./includes/side-nav.ejs') %>
+        <div class="wrapper">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+            <main id="shipments">
+                <section class="head">
+                    <div class="flex f-space-between">
+                        <h2>Orders</h2>
+                        <!--Main Actions -->
+                        <aside class="flex f-space-between">
+
+                            <a href="/admin/orders/new?lang=en" class="btn bg-w toggle-new-item">New Order </a>
+                        </aside>
+                    </div>
+                </section>
+                <section class="search">
+                    <input class="item" type="text" name="search-serial" id="search-serial"
+                        placeholder="Search Order Number">
+                    <div class="flex">
+                        <a href="" class="download-sheet none">Download</a>
+                        <div class="flex item">
+
+                            <select name="search-date-type" id="search-date-type">
+                                <option value="date">Creation Date</option>
+                                <option value="order_info.delivery_date">Delivery Date</option>
+                            </select>
+                            <div id="reportrange" data-filter="date">
+                                <i class="fa fa-calendar"></i>&nbsp;
+                                <span></span>
+                                <i class="fa fa-caret-down"></i>
+                            </div>
+                        </div>
+
+                        <div class="p-relative">
+                            <a class="item sub-menu_btn">Filter<i class="fa fa-caret-down m-r-3 m-l-3"></i></a>
+                            <ul class="sub-menu">
+                                <li class=" p-relative">
+                                    <a class="sub-menu_btn second-level">Status<i
+                                            class="fa fa-caret-left m-r-3 m-l-3"></i></a>
+                                    <ul class="sub-menu">
+                                        <li class="filter-shipments" data-filter="status" data-sku="Pending" data-val="1">Pending
+                                        </li>
+                                        <li class="filter-shipments" data-filter="status" data-sku="Confirmed" data-val="2">
+                                            Confirmed</li>
+                                        <li class="filter-shipments" data-filter="status" data-sku="Delivered" data-val="4">
+                                            Delivered</li>
+                                        <li class="filter-shipments" data-filter="status" data-sku="Bounced back" data-val="5">
+                                            Bounced back</li>
+                                        <li class="filter-shipments" data-filter="status" data-sku="Canceled" data-val="6">Canceled
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class=" p-relative" id="category">
+                                    <a class="sub-menu_btn second-level">Category<i
+                                            class="fa fa-caret-left m-r-3 m-l-3"></i></a>
+                                    <ul class="sub-menu">
+                                        <% for(c of categories) { %>
+                                            <li class="filter-shipments" data-filter="category" data-sku="<%=c.name%>"  data-val="<%=c.name%>">
+                                                <%=c.name%>
+                                            </li>
+                                            <%}%>
+                                    </ul>
+                                </li>
+                                <li class=" p-relative" id="zones">
+                                    <a class="sub-menu_btn second-level">Zones<i
+                                            class="fa fa-caret-left m-r-3 m-l-3"></i></a>
+                                    <ul class="sub-menu">
+                                        <% for(c of zones) { %>
+                                            <li class="filter-shipments" data-filter="zone" data-sku="<%=c.name%>"  data-val="<%=c.zoneId%>">
+                                                <%=c.name%>
+                                            </li>
+                                            <%}%>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </section>
+                <div class="flex f-start options">
+                    <div class="p-relative">
+                        <a class="btn btn-small sub-menu_btn">Filter</a>
+                        <ul class="sub-menu">
+                            <li class="filter-shipments" data-filter="status" data-sku="Pending" data-val="1">Pending
+                            </li>
+                            <li class="filter-shipments" data-filter="status" data-sku="Confirmed" data-val="2">
+                                Confirmed</li>
+                            <li class="filter-shipments" data-filter="status" data-sku="Delivered" data-val="4">
+                                Delivered</li>
+                            <li class="filter-shipments" data-filter="status" data-sku="Bounced back" data-val="5">
+                                Bounced back</li>
+                            <li class="filter-shipments" data-filter="status" data-sku="Canceled" data-val="6">Canceled
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="p-relative">
+                        <a class="btn btn-small sub-menu_btn">Sort</a>
+                        <ul class="sub-menu">
+                            <li class="sort" data-filter="date" data-sku="New" data-val="new">New</li>
+                            <li class="sort" data-filter="date" data-sku="Old" data-val="old">Old</li>
+                            <li class="sort" data-filter="price" data-sku="High Price" data-val="high">High Price</li>
+                            <li class="sort" data-filter="price" data-sku="Low Price" data-val="low">Low Price</li>
+                        </ul>
+                    </div>
+                    <a href="" class="btn btn-small create-excel">Export <i class="fas fa-file-excel"></i></a>
+                    <a class="btn btn-small m-3 bar-layout p-medium"><i class="fas fa-bars "></i></a>
+                    <a class="btn btn-small m-3 grid-layout p-medium"><i class="fas fa-grip-horizontal "></i></a>
+                </div>
+                <div class="options-filters flex">
+
+                </div>
+                <div class="client-info_basics m-large">
+                    <div class="new-shipment-box slideable">
+                        <form action="/create-shipment" method="post" class="inside-wrapper">
+                            <div class="form-actions flex f-space-around">
+                                <h3>سائق جديد</h3>
+                                <button type="submit" class="btn btn-success save-shipment">حفظ</button>
+                            </div>
+                            <i class="fas fa-times close toggle-new-shipment"></i>
+                            <div class="form-group">
+                                <label for="shipmentName">اسم العميل <span class="c-r">*</span></label>
+                                <input type="text" id="shipmentName" class="form-control" name="newshipmentname"
+                                    placeholder="shipment Name..">
+                            </div>
+                            <div class="form-group">
+                                <label for="shipmentNumber">رقم العميل</label>
+                                <input type="tel" id="shipmentNumber" class="form-control" name="newshipmentmobile"
+                                    placeholder="Client Mobile..">
+                            </div>
+                            <div class="form-group">
+                                <label for="shipmentAddress">عنوان العميل</label>
+                                <input type="text" id="shipmentAddress" class="form-control" name="newshipmentaddress"
+                                    placeholder="Client Address..">
+                            </div>
+                            <div class="form-group">
+                                <label for="shipmentEmail">البريد الالكتروني</label>
+                                <input type="email" id="shipmentEmail" class="form-control" name="newshipmentemail"
+                                    placeholder="Client Email..">
+                            </div>
+                            <div class="form-group">
+                                <label for="shipmentImage">صوره العميل</label>
+                                <input type="file" id="shipmentImage" class="form-control shipmentImage"
+                                    name="newshipmentimg">
+                            </div>
+                            <div class="form-group">
+                                <label for="newshipmentnotes">ملحوظه</label>
+                                <input type="email" id="newshipmentnotes" class="form-control" name="newshipmentnotes"
+                                    placeholder="Leave Note....">
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+
+                <div class="content">
+                    <div class="content-desc">
+                        <span> Order Number</span>
+                        <span>Date</span>
+                        <span>User</span>
+                        <span>Amount</span>
+                        <span>Status</span>
+                    </div>
+                    <div class="items"></div>
+                    <img class="loading none" src="/admin/images/loading(3).svg">
+                </div>
+
+
+                <div class="pop-up_container none" data-form="statusForm" id="create_form">
+                    <div class="pop-up_container_form">
+                        <i class="fas fa-times close close-form"></i>
+                        <form class="change-status">
+                            <div class="form-group">
+                                <label for="name">Change Status</label>
+                                <select name="shipmentstatus" id="shipmentstatus">
+                                    <option value="2">Confirmed</option>
+                                    <option value="4">Delivered</option>
+                                    <option value="5">Bounced back</option>
+                                    <option value="6">Canceled</option>
+                                </select>
+                            </div>
+                            <div class="shipmentreason form-group none">
+                                <label for="shipmentreason">Reason</label>
+                                <input type="text" name="shipmentreason" id="shipmentreason">
+
+                            </div>
+                            <div class="flex f-end">
+                                <button type="submit" class="btn btn-success m-3">Change</button>
+                                <a class="btn btn-danger close-form m-3">Close</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="pop-up_container none" data-form="assignForm" id="create_form">
+                    <div class="pop-up_container_form">
+                        <i class="fas fa-times close close-form"></i>
+                        <form class="assign-shipment">
+                            <div class="form-group">
+                                <label for="driverNo">اختر المندوب</label>
+                                <select name="" id="driverNo">
+                                </select>
+                            </div>
+                            <div class="flex f-end">
+                                <button type="submit" class="btn btn-success m-3">تعين</button>
+                                <a class="btn btn-danger close-form m-3">اغلاق</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="customer-shipments slideable ">
+                    <div class="inside-wrapper p-large">
+
+                        <div class="form-actions">
+                            <i class="fas fa-times close font-xl close-shipments"></i>
+
+                            <h4>جميع طلبات العميل </h4>
+                            <div class="flex f-space-between ">
+                                <input type="number" name="order-serial" class="order-serial form-control"
+                                    placeholder="Search by order number..  " id="">
+                                <div>
+                                    <a class="btn btn-small sub-menu_btn">ترتيب</a>
+                                    <ul class="sub-menu">
+                                        <li class="sort-new sort-date">الجديد</li>
+                                        <li class="sort-old sort-date">القديم</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <img src="/admin/images/loading(3).svg" class="loading small none">
+
+                    </div>
+                </div>
+            </main>
+
+        </div>
+
+
+        <%- include('./includes/scripts.ejs') %>
+            <script src="/admin/modules/components/en/orders.js"> </script>
+            <script src="/admin/modules/interface/orders.js"> </script>
+</body>
+
+</html>

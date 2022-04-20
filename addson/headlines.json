@@ -1,0 +1,44 @@
+[
+  {
+    "info": {
+      "name": "Headlines"
+    },
+    "items": [
+      {
+        "name": "1",
+        "group": "text",
+        "content": "<h1 data-type='text'>Heading 1</h1>"
+      },
+      {
+        "name": "2",
+        "group": "text",
+        "content": "<h2 data-type='text'>Heading 2</h2>"
+      },
+      {
+        "name": "3",
+        "group": "text",
+        "content": "<h3 data-type='text'>Heading 3</h3>"
+      },
+      {
+        "name": "4",
+        "group": "text",
+        "content": "<h4 data-type='text'>Heading 4</h4>"
+      },
+      {
+        "name": "5",
+        "group": "text",
+        "content": "<h5 data-type='text'>Heading 5</h5>"
+      },
+      {
+        "name": "4",
+        "group": "text",
+        "content": "<h6 data-type='text'>Heading 6</h6>"
+      },
+      {
+        "name": "4",
+        "group": "text",
+        "content": "<p data-type='text'>I'm a paragraph. Click here to add your own text and edit me. It's easy.</p>"
+      }
+    ]
+  }
+]

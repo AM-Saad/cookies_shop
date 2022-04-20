@@ -1,0 +1,35 @@
+<div class="offcanvas_aside offcanvas_aside_right">
+    <div class="offcanvas_aside_content">
+        <div class="offcanvas_minicart">
+            <div class="offcanvas_header">
+                <h1>Your Cart</h1>
+                <div class="close-icon" onclick="closeCart()">
+                    <span class="close-icon_top"></span>
+                    <span class="close-icon_bottom"></span>
+                </div>
+            </div>
+            <div class="offcanvas_content">
+                <div class="items">
+
+                </div>
+                <div id="promo-box">
+
+                </div>
+            </div>
+            <div class="offcanvas-footer none">
+                <h2 class="grand-total">Grand Total:<b class="grand"></b></h2>
+                <div class="flex f-space-between ">
+                    <a class="btn btn-main big-btn active check-out m-medium">Check Out</a>
+                    <a class="btn btn-main big-btn viewcart m-medium">View Cart</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<% if (!isAdmin) { %>
+
+    <span id="cart_button" onclick="getCart(this)">
+        <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+    </span>
+    <%}%>

@@ -1,0 +1,38 @@
+.single-item-core{
+ 
+    border: 1px solid #ccc;
+    margin: var(--m-margin);
+    padding: var(--s-padding);
+}
+
+#search-date-type{
+    margin:0 var(--s-margin);
+    border: 0;
+}
+
+.content-desc{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    padding: var(--s-padding);
+}
+
+/* .content-desc span{
+    font-size: 14px;
+    text-align: center;
+} */
+/* 
+.content-item{
+    display: unset;
+}
+.content-item_body{
+    
+    display: grid !important;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+.content-item p, .content-item span{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    margin: 0px;
+} */

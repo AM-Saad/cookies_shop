@@ -1,0 +1,62 @@
+/* body {
+    min-height: 650px;
+} */
+
+.forms {
+    padding: var(--l-padding);
+    box-shadow: var(--shadow3);
+    border-radius: 25px;
+    width: 800px;
+    margin: auto;
+    max-width: 100%;
+    min-height: 74vh;
+}
+
+.forms p {
+    color: #888;
+    font-size: 15px;
+    margin-bottom: var(--s-margin);
+}
+
+.forms .actions .btn {
+    background-color: transparent;
+    color: var(--main-color);
+}
+
+.forms .actions {
+    margin-bottom: var(--l-margin);
+    justify-content: space-around;
+}
+
+.forms .actions .btn.active {
+    background-color: var(--main-color);
+    color: #fff;
+}
+
+.forms .form-wrapper {
+    grid-gap: 5px;
+}
+
+.forms .form-img {
+    background-image: url(/shop/images/logo.jpg);
+    background-position: right;
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 100%;
+    /* background: red; */
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: -1;
+    /* opacity: .5; */
+}
+
+.forms .form-wrapper .form-img img {
+    max-width: 100%;
+}
+
+@media only screen and (max-width: 900px) and (orientation: portrait) {
+    .forms .form-img {
+        display: none;
+    }
+}

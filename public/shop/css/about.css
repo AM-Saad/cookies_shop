@@ -1,0 +1,152 @@
+img {
+    max-width: 100%;
+    display: block;
+}
+
+header {
+    position: relative;
+}
+
+.hero-img img {
+    max-height: 50vh;
+    margin: auto;
+
+}
+
+.hero-title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: #1300008b;
+    display: grid;
+    align-items: center;
+    color: #fff;
+}
+
+.hero-title div {
+    width: 70%;
+    margin: auto;
+    font-size: 3vmin;
+}
+
+.hero-title div h1 {
+    margin: 0;
+    margin-bottom: var(--m-margin);
+}
+
+.about-section-story {
+    display: flex;
+    align-items: center;
+    margin-top: 90px;
+}
+
+.about-section-story .pic {
+    width: calc(100% / (12/4));
+    text-align: center;
+}
+
+.about-section-story .text {
+    width: calc(100% / (12/8));
+    padding: 70px 0;
+    padding-right: 80px;
+    padding-left: 40px;
+}
+
+ .section-title {
+    font-size: 21px;
+    font-weight: 600;
+    color: #121212;
+    position: relative;
+    z-index: 2;
+}
+ .section-title:after {
+    content: '';
+    background-color: #D9DECE;
+    width: 40px;
+    height: 6px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+}
+.about-section-story .text p {
+    font-size: 16px;
+    line-height: 30px;
+    margin-top: 16px;
+    font-weight: 300;
+}
+
+.about-section-mission {
+    margin-top: 95px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.about-section-mission::before {
+    content: '';
+    position: absolute;
+    top: 34px;
+    right: 0;
+    bottom: 34px;
+    left: -34px;
+    background-color: #FBE8DC;
+}
+
+.about-section-mission .pic {
+    width: calc(100% / (12/4));
+    text-align: center;
+    position: relative;
+}
+
+.about-section-mission .pic img {
+    display: block;
+    margin: auto;
+    box-shadow: 0 4px 10px 0 rgb(0 0 0 / 15%);
+    border-radius: 2px;
+}
+
+.about-section-mission .text {
+    width: calc(100% / (12/8));
+    padding: 110px 42px;
+    position: relative;
+}
+
+.about-section-mission .text h2 {
+    font-size: 39px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 900;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+@media screen and (max-width: 767px) {
+    .about-section-story .text {
+        width: 100%;
+        padding: 30px 0;
+    }
+    .about-section-story .pic {
+        width: 100%;
+        order: 1;
+    }
+    .about-section-story {
+        flex-wrap: wrap;
+        margin-top: 0;
+    }
+    .about-section-mission .pic {
+        width: 100%;
+        order: 1;
+    }
+    .about-section-mission .text {
+        width: 100%;
+        padding: 40px 30px;
+    }
+    .about-section-mission .text h2 {
+        font-size: 30px;
+    }
+    .about-section-mission {
+        flex-wrap: wrap;
+        margin-top: 40px;
+    }
+}

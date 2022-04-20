@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Custom styles for this template -->
+    <%- include('./templates_includes/template_styles.ejs') %>
+    <link href="/shop/css/products.css" rel="stylesheet">
+
+</head>
+
+
+<body class="home-page is-dropdn-click">
+
+    <%- include('./templates_includes/search.ejs') %>
+
+
+    <!-- NAViGATION -->
+
+    <%- include('./templates_includes/nav.ejs') %>
+
+    <!-- NAViGATION -->
+
+    <div class="wrapper">
+
+        <section class="section" id="category">
+            <%- include('./templates_includes/categories.ejs') %>
+        </section>
+        
+        <section class="section">
+            <h1 style="text-align: center; font-size:35px; margin:20px 0">Stay tuned for our diet keto, low-carb and even high-protein cookies!</h1>
+            <img src="/shop/images/comming-soon.jpg" class="w-100 m-auto d-block" alt="">
+        </section>
+
+        <%- include('./templates_includes/cart.ejs') %>
+        <div class="modal-container none">
+            <div class="modal modal--bg"></div>
+        </div>
+    </div>
+    <%- include('./templates_includes/footer.ejs') %>
+
+    <%- include('./templates_includes/scripts.ejs') %>
+
+</body>
+
+</html>

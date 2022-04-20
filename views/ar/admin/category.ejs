@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <%- include('./includes/styles.ejs') %>
+        <link rel="stylesheet" href="/admin/css/driver.css" />
+
+</head>
+
+<body>
+    <%- include('./includes/side-nav.ejs') %>
+        <div class="wrapper">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+            <main id="vehicles">
+                <section class="head">
+                    <div class="flex f-space-between">
+                        <h2>التصنيفات</h2>
+                        <!--Main Actions -->
+                        <aside class="flex f-space-between">
+
+                            <a class="btn bg-w toggle-new-item">تصنيف جديد</a>
+                        </aside>
+                    </div>
+                </section>
+                <section class="search flex ">
+
+                    <input class="form-control" type="text" name="search-name" id="search-name"
+                        placeholder="ابحث بالاسم او الرقم">
+
+                </section>
+
+                <!-- <div class="flex f-start options">
+                    <a href="" class="btn btn-small create-excel">Export <i class="fas fa-file-excel"></i></a>
+                    <div>
+                        <a class="btn btn-small sub-menu_btn sort-menu_btn p-relative">
+                            <i class=" fas fa-filter"></i>
+                            Filter
+                            <ul class="sub-menu">
+                                <li class="btn bg-w sort heigest">Heigest</li>
+                                <li class="btn bg-w sort">Lowest</li>
+                            </ul>
+                        </a>
+                    </div>
+                    <a class="btn btn-small m-3 bar-layout p-medium"><i class="fas fa-bars "></i></a>
+                    <a class="btn btn-small m-3 grid-layout p-medium"><i class="fas fa-grip-horizontal "></i></a>
+                </div> -->
+                <div class="client-info_basics m-large">
+                    <div class="new-item-box slideable">
+                        <form action="/create-item" method="post" class="inside-wrapper">
+                            <div class="form-actions flex f-space-around">
+                                <h3>تصنيف جديد</h3>
+                                <button type="submit" class="btn btn-success save-item">حفظ</button>
+                            </div>
+                            <i class="fas fa-times close toggle-new-item"></i>
+                            <div class="form-group">
+                                <label for="name">الاسم <span class="c-r">*</span></label>
+                                <input type="text" id="name" class="form-control" name="name" placeholder="اسم التصنيف">
+                            </div>
+                            <div class="form-group">
+                                <div>
+                                    <label for="sub">تصنيفات فرعيه</label>
+                                    <div class="flex">
+                                        <input class="form-control" type="text" name="sub" id="sub"
+                                            placeholder="اضف تنصيف فرعي">
+                                        <a id="add-subcategory" class="btn btn-success">اضف</a>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tags flex">
+
+                            </div>
+                            <div class="form-group">
+                                <label for="image">صوره التصنيف</label>
+                                <input type="file" name="image" id="image" placeholder="ضف تصنيف ثم اضعط enter">
+                            </div>
+                            <div class="form-group">
+                                <label for="order">ترتيب التصنيف</label>
+                                <input type="number" name="order" id="order" placeholder="ترتيب التنصيف في الظهور">
+                            </div>
+                            <div class="form-group">
+                                <label for="tag">وسم</label>
+                                <select name="tag" id="tag">
+                                    <option value="new" data-ar="جديد">
+                                        جديد
+                                    </option>
+                                    <option value="hot" data-ar="ساخن">
+                                        ساخن
+                                    </option>
+                                    <option value="special" data-ar="مميز">
+                                        مميز
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="active">نشط</label>
+                                <input type="checkbox" id="active" class="form-control" name="active">
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+
+                <div class="content  g-three">
+                    <div class="content-desc">
+                        <span>اسم التصنيف </span>
+                        <span>الحاله</span>
+                    </div>
+                    <div class="items"></div>
+                    <img class="loading none" src="/admin/images/loading(3).svg">
+                </div>
+
+
+                <div class="pop-up_container none" data-form="assignForm" id="create_form">
+                    <div class="pop-up_container_form">
+                        <i class="fas fa-times close close-form"></i>
+                        <form class="assign-shipment">
+                            <div class="form-group">
+                                <label for="driverNo">اختر المندوب</label>
+                                <select name="" id="driverNo">
+                                </select>
+                            </div>
+                            <div class="flex f-end">
+                                <button type="submit" class="btn btn-success m-3">تعين</button>
+                                <a class="btn btn-danger close-form m-3">اغلاق</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </main>
+
+        </div>
+
+
+        <%- include('./includes/scripts.ejs') %>
+            <script src="/admin/modules/components/ar/category.js"> </script>
+            <script src="/admin/modules/interface/category.js"> </script>
+</body>
+
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Custom styles for this template -->
+    <%- include('./shop/templates_includes/template_styles.ejs') %>
+    <style>
+        body {
+            background-color:#ffab65
+
+        }
+
+        .wrapper {
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #fff;
+            margin: var(--m-margin) 0;
+        }
+
+        img {
+            max-width: 100%;
+            margin: auto;
+            display: block;
+        }
+
+        #category_box {
+            justify-content: center !important;
+        }
+
+        #category_box li {
+            border-color: #fff !important;
+        }
+
+        #category_box li a {
+            color: #fff !important;
+
+        }
+
+        button {
+
+            display: block;
+            margin:5px auto !important;
+            background: #fff !important;
+            color: var(--main-color) !important;
+        }
+    </style>
+</head>
+
+<body class="home-page">
+
+
+    <!-- NAViGATION -->
+
+
+    <!-- NAViGATION -->
+
+    <div class="wrapper">
+        <div class="error-pages">
+            <img src="/shop/images/404.jpg" alt="">
+            <%- include('./shop/templates_includes/categories.ejs') %>
+
+            <button class="btn" onclick="goBack()">Go Back</button>
+
+            <script>
+                function goBack() {
+                    window.history.back();
+                }
+            </script>
+        </div>
+    </div>
+
+
+
+    <script data-reload="true" src="/shop/modules/quick_view.js"></script>
+    <script data-reload="true" src="/shop/modules/products.js"></script>
+</body>
+
+</html>

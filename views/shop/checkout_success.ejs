@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Custom styles for this template -->
+    <%- include('./templates_includes/template_styles.ejs') %>
+    <link href="/shop/css/orders.css" rel="stylesheet">
+    <link href="/shop/css/checkout_success.css" rel="stylesheet">
+   
+
+</head>
+
+
+
+
+<body onload="getCart()" class="home-page is-dropdn-click">
+
+    <!-- NAViGATION -->
+
+
+    <!-- NAViGATION -->
+
+    <div class="wrapper">
+
+
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+        <div class="grid g-two p-meduim">
+            <div class="greeting">
+                <h1>Thank you. Your order has been received.</h1>
+                <p>Order number: <%= order.serialNo%></p>
+                <p>Date: <%= order.date %></p>
+                <p>Delivery Date: <%= order.order_info.delivery_date %></p>
+                <p>Total: <%= order.totalPrice %> EGP</p>
+
+            </div>
+            <div class="order__items ">
+                <h2>Order Details</h2>
+                <ul class="order__item-list">
+                    <li class="order__item grid g-four ">
+                        <h3> Product </h3>
+                        <h3>Qty: </h3>
+                        <h3>Price: </h3>
+                        <h3>Total: </h3>
+                    </li>
+                    <% order.items.forEach(p => { %>
+
+                    <li class="order__item grid g-four ">
+                        <h3><%= p.name %></h3>
+                        <h3> <%= p.quantity %></h3>
+                        <h3> <%= p.price %></h3>
+                        <h3> <%= p.price * p.quantity   %></h3>
+                    </li>
+                    <% }) %>
+                </ul>
+                <div class="centered">
+                    
+                    <h4 class="total ">Total:
+                       EGP <%= order.totalPrice - order.order_info.shipping_details.price %>
+                    </h4>
+                    <h4 class="total">Shipping:
+                       EGP <%= order.order_info.shipping_details.price %>
+                    </h4>
+                    <h3 class="total">Grand Total:
+                       EGP <%= order.totalPrice %>
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <a href="/" class="btn">Return To Shop</a>
+    </div>
+
+    <%- include('./templates_includes/scripts.ejs') %>
+
+</body>
+
+</html>

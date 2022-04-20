@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <%- include('./includes/styles.ejs') %>
+        <link rel="stylesheet" href="/adminold/css/inventory.css" />
+
+</head>
+
+
+<body class="scroller">
+
+    <%- include('./includes/side-nav.ejs') %>
+
+        <div class="wrapper">
+            <main id="inventory-items">
+                <section class="head">
+                    <div class="flex f-space-between">
+                        <h2> المخزن</h2>
+                        <!--Main Actions -->
+                        <aside class="flex f-space-between">
+
+                            <a class="btn bg-w toggle-new-item" id="openAdditemBox">منتج جديد</a>
+                        </aside>
+                    </div>
+                </section>
+
+                <div class="flex f-space-between options">
+                    <div class="flex f-start options">
+
+                        <div class="p-relative item-filters">
+                            <a class="btn btn-small sub-menu_btn">فلتر</a>
+                            <ul class="sub-menu">
+
+                            </ul>
+                        </div>
+                        <div class="p-relative">
+                            <a class="btn btn-small sub-menu_btn">ترتيب</a>
+                            <ul class="sub-menu">
+                                <li class="sort" data-filter="date" data-sku="الاحدث" data-val="new">الاحدث</li>
+                                <li class="sort" data-filter="date" data-sku="الاقدم" data-val="old">الاقدم</li>
+                                <li class="sort" data-filter="price" data-sku="الاعلي" data-val="high">الاغلي</li>
+                                <li class="sort" data-filter="price" data-sku="الاقل" data-val="low">الارخص</li>
+                                <li class="sort" data-filter="quantity" data-sku="الاعلي" data-val="high">الاعلي</li>
+                                <li class="sort" data-filter="quantity" data-sku="الاقل" data-val="low">الاقل</li>
+                            </ul>
+                        </div>
+                        <a href="" class="btn btn-small create-excel">Export <i class="fas fa-file-excel"></i></a>
+                        <a class="btn btn-small m-3 bar-layout p-medium"><i class="fas fa-bars "></i></a>
+                        <a class="btn btn-small m-3 grid-layout p-medium"><i class="fas fa-grip-horizontal "></i></a>
+                    </div>
+
+                    <section class="search" style="border: none;">
+                        <div>
+                            <a href="" class="download-sheet none">Download</a>
+
+                            <input class="item" type="text" name="search-name" id="search-name"
+                                placeholder="ابحث بأسم المنتج">
+                        </div>
+                    </section>
+                </div>
+                <div class="options-filters flex">
+
+                </div>
+                <!-- <section class="sorting flex f-start">
+
+                    <div class="flex f-space-around">
+                        <div class="p-relative">
+                            <a class="btn btn-small m-3 flex  sub-menu_btn sort-menu_btn">ترتيب<i
+                                    class="fas fa-sort"></i>
+                                <ul class="sub-menu">
+                                    <li class="btn bg-w sort heigest">الاعلي كميه</li>
+                                    <li class="btn bg-w sort">الاقل كميه</li>
+                                </ul>
+                            </a>
+                        </div>
+                        <a class="btn btn-small  bar-layout"><i class="fas fa-bars change-layout"></i></a>
+                        <a class="btn btn-small grid-layout"><i class="fas fa-grip-horizontal change-layout "></i></a>
+                    </div>
+
+
+                </section> -->
+                <div class="content  g-three">
+                    <div class="content-desc">
+                        <span>اسم المنتج </span>
+                        <span>السعر</span>
+                        <span>الكميه</span>
+                        <span>الخصم</span>
+                    </div>
+                    <div class="items">
+
+                    </div>
+                    <img class="loading none" src="/admin/images/loading(3).svg">
+                </div>
+
+                <input type="hidden" name="" id="bCode" autofocus>
+
+                <div id="add-item" class="slideable">
+                    <div class="inside-wrapper">
+                        <div class="progress-bar">
+                            <div class="precentage">
+                            </div>
+                        </div>
+                        <div class="flex f-space-between form-actions">
+                            <i class="fas fa-arrow-left close" id="closeAdditemBox"></i>
+                            <h3>منتج جديد</h3>
+                            <a id="addNewitem" class="btn save-btn btn-success">
+                                <span class="arrow-btn">
+                                    <span>حفظ المنتج</span>
+                                    <i class="fas fa-arrow-up"></i>
+                                </span>
+                            </a>
+                        </div>
+
+                        <div class="item-info">
+                            <div class="item-info_data grid">
+                                <div class="item-info_data_inputs">
+                                    <div class="form-group">
+                                        <label for="itemName">اسم/كود المنتج</label>
+                                        <input type="text" class="form-control itemName" id="itemName" name="itemName"
+                                            placeholder="ادخل اسم المنتج">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="quantity">الكميه</label>
+                                        <input type="number" class="form-control item-inputs" name="itemQuantity"
+                                            min="1" id="quantity" placeholder="ادخل الكميه" value="1">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="purchasingPriceResult">سعر شراء المنتج</label>
+
+                                        <input type="number" class="form-control item-inputs" name="purchasingPrice"
+                                            min="0" id="purchasingPriceResult" placeholder="ادخل سعر الشراء">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="sellingPriceResult">سعر البيع/القطعه</label>
+                                        <input type="number" class="form-control item-inputs" name="sellingPrice"
+                                            min="0" id="sellingPriceResult" placeholder="ادخل سعر البيع">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="itemDesc">وصف المنتج</label>
+                                        <textarea type="text" class=" itemDesc" rows="5" id="itemDesc" name="itemDesc"
+                                            placeholder="اوصف المنتج"></textarea>
+                                    </div>
+                                </div>
+                                <div>
+
+
+                                    <div class="category-wrapper">
+                                        <div class="form-group">
+                                            <label for="itemGroupResult">التصنيف</label>
+                                            <select name="itemGroupResult" class="form-control itemGroupResult"
+                                                id="itemGroupResult">
+                                                <option value="default">الافتراضي</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <select id="sub" class="form-control none">
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="discount">خصم:</label>
+                                        <input type="number" class="form-control item-inputs" name="discount"
+                                            id="itemDiscount" placeholder="اضف خصم علي المنتج" value="0" min="0"
+                                            max="100">
+                                    </div>
+                                    <div class="form-group">
+                                        <div>
+                                            <label for="featured">مميز:</label>
+                                            <input type="checkbox" class="form-control item-inputs" name="featured"
+                                                id="featured">
+                                        </div>
+                                        <div>
+                                            <label for="popular">شائع:</label>
+                                            <input type="checkbox" class="form-control item-inputs" name="popular"
+                                                id="popular">
+                                        </div>
+                                    </div>
+
+                                    <div class="add-category-items_attrsbox block form-group">
+                                        <div class="flex f-space-between">
+                                            <div class="flex">
+                                                <h3>الصفات</h3>
+                                                <div class="tooltip-icon">
+                                                    <span
+                                                        tooltip=" (  مثال :صفه الملابس هي الوان و مقاسات , و المقاس لديه اختيارات كا الكبير, المتوسط و الصغير)"
+                                                        flow="right">?</span>
+                                                </div>
+                                            </div>
+                                            <button id="addAttrBtn" class="btn btn-light ">اضافه صفه جديده</button>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group grid">
+                                        <label for="">اضافه صور المنتج (بحد اقصي 5)</label>
+                                        <label for="itemImg"><img src="../../images/imageIcon.png" width="200"
+                                                alt="imgfile"></label>
+                                        <input type="file" name="itemImg" class="item-inputs itemImg" id="itemImg"
+                                            multiple />
+                                    </div>
+                                    <div class="images-perview">
+                                    </div>
+                                    <!-- <img class="item-preview_image" src=""> -->
+                                </div>
+                                <!-- <canvas class="img-responsive" id="itemBarcodeCanvas"></canvas> -->
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="edit-stock_info slideable"></div>
+
+
+                <div class="edit-unit-form slideable">
+                    <form action="/update-units" method="post" class="inside-wrapper">
+                        <i class="fas fa-time close-edit-units"></i>
+                        <div class="form-actions">
+                            <h3>Item Units</h3>
+                            <button type="submit" class="btn btn-success update-units">Save</button>
+                        </div>
+                    </form>
+                </div>
+
+
+                <div class="category-settings external-box none p-3">
+                    <div class="flex f-space-between form-actions">
+                        <h3>التصنيفات</h3>
+                        <a class="toggle-create-category btn btn-success">تصنيف جديد</a>
+                        <i class="fas fa-times close close-category-settings"></i>
+                    </div>
+                    <div class="item-setting_items"></div>
+                </div>
+
+                <div class="refund-box none">
+                    <input type="hidden" name="itemId">
+                    <div class="form-group">
+                        <div class="form-check  mb-2"> <input id="a426b4f21" class="form-check-input " type="radio"
+                                value="quantity"> <label class="form-check-label" for="a426b4f21">Quantity
+                                Adjustment</label> </div>
+                        <div class="form-check  mb-2"> <input id="ae2dd5eba" class="form-check-input " type="radio"
+                                value="value"> <label class="form-check-label" for="ae2dd5eba">Value
+                                Adjustment</label> </div>
+                    </div>
+                </div>
+                <div class="units-settings external-box none p-3">
+                    <div class="flex f-space-between form-actions">
+                        <h3>Units</h3>
+                        <a class="toggle-create-unit btn btn-success">New</a>
+                        <i class="fas fa-times close close-units-settings"></i>
+                    </div>
+
+                    <div class="item-setting_items"></div>
+                </div>
+            </main>
+            <div id="operations-summary">
+
+            </div>
+        </div>
+        <%- include('./includes/scripts.ejs') %>
+
+            <script src="/admin/modules/interface/inventory/validations.js"></script>
+            <script src="/admin/modules/interface/inventory/inventorycomponents.js"></script>
+            <script src="/admin/modules/interface/inventory/inventory-items.js"></script>
+
+
+</body>
+
+</html>

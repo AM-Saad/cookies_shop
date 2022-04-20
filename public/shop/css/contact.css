@@ -1,0 +1,47 @@
+h1{
+    font-size: 30px;
+    text-align: center;
+    margin: var(--l-margin) 0
+
+}
+section {
+    margin: var(--l-margin) var(--s-margin);
+    padding: var(--l-padding);
+}
+section#about p, section#contact p {
+    font-size: 20px;
+    line-height: 2em;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: var(--l-margin);
+}
+ section#contact p {
+    line-height: .5em !important;
+    font-size: 22px;
+
+}
+section#contact form {
+    background-color: #f9f9f9;
+    display: grid;
+    grid-gap: var(--m-margin);
+    padding: var(--m-padding);
+}
+
+section h2 {
+    color: #c17834;
+    font-size: 30px;
+    margin: var(--m-margin) 0;
+    text-align: center;
+}
+.form-control {
+    margin: var(--s-margin) 0;
+    padding: var(--s-padding);
+    position: relative;
+    align-items: center;
+}
+
+@media only screen and (max-width: 900px) {
+section{
+    padding:var(--s-padding)
+}
+}
